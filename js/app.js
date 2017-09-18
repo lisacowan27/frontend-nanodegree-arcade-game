@@ -6,6 +6,9 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    //TODO set the initial location
+    //TODO set the speed
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +17,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    //TODO update the location
+    //TODO handle a collision
 };
 
 // Draw the enemy on the screen, required method for game
@@ -25,7 +31,31 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+//Player class definition
+var Player = function() {
+    this.sprite = 'images/char-pink-girl.png';
+    //TODO set the initial location
+    //TODO handle a collision
+};
 
+
+//Player update method
+Player.prototype.update = function(dt) {
+    //TODO update the location
+    //TODO handle a collision
+};
+
+//Player render method
+Player.prototype.render = function(dt) {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+//Player handleInput method
+Player.prototype.handleInput function(allowedKeys) {
+    //TODO move in the direction of the keys
+    //TODO keep within the confines of the canvas (505, 606)
+    //TODO reset if the player reaches the water (find pixel # of the beginning of the row)
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
