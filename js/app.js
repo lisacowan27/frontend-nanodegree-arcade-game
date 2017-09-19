@@ -1,15 +1,14 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     //TODO set the initial location
     this.x = -100;
-    // y is above 240 and below 486
-    /*this.y = function getRandomIntInclusive(220, 475) {
+    // y is below 396 and above 130 (water row + 20 padding)
+    /*this.y = function getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -42,16 +41,16 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = 'images/char-boy.png';
     //TODO set the initial location
-    this.x = 233;
-    this.y = 70;
+    this.x = 210;
+    this.y = 420;
     //TODO handle a collision
 };
-
 
 //Player update method
 Player.prototype.update = function(dt) {
     //TODO update the location
     //TODO handle a collision
+    //QUESTION: WHY USE PROTOTYPE HERE WHEN WE ARE JUST CREATING 1 PLAYER, AND THERE WILL ONLY EVER BE 1 INSTANCE OF PLAYER?
 };
 
 //Player render method
@@ -63,26 +62,28 @@ Player.prototype.render = function(dt) {
 Player.prototype.handleInput = function(allowedKeys) {
     //TODO move in the direction of the keys
     //TODO keep within the confines of the canvas width (505) and where the player hits water (486)
-    if (key === "left" && (this.x > 0 || this.x < 505)) {
+    if ('keyup' === 'left' && (this.x > 0 || this.x < 505)) {
         this.x = -101;
     };
-    if (key === "right" && (this.x > 0 || this.x < 505)) {
+    if ('keyup' === 'right' && (this.x > 0 || this.x < 505)) {
         this.x = 101;
     };
-    if (key === "up" && (this.y > 0 || this.y < 486)) {
+    if ('keyup' === 'up' && (this.y > 0 || this.y < 486)) {
         this.y = 80;
     };
-    if (key === "down" && (this.y > 0 || this.y < 486 )) {
+    if ('keyup' === 'down' && (this.y > 0 || this.y < 486 )) {
         this.y = -80;
     };
 
     //TODO reset if the player reaches the water (486)
 };
 // Now instantiate your objects.
+
+
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 // Place the player object in a variable called player
-var player = {};
+var player = new Player();
 
 
 
