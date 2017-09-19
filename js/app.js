@@ -6,9 +6,16 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-
     //TODO set the initial location
-    //TODO set the speed
+    this.x = -100;
+    // y is above 220 and below 475
+    this.y = function getRandomIntInclusive(220, 475) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    //TODO enemy speed
+    var speed = ;
 };
 
 // Update the enemy's position, required method for game
