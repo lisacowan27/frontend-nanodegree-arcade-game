@@ -8,14 +8,14 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     //TODO set the initial location
     this.x = -100;
-    // y is above 220 and below 475
-    this.y = function getRandomIntInclusive(220, 475) {
+    // y is above 240 and below 486
+    /*this.y = function getRandomIntInclusive(220, 475) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    }*/
     //TODO enemy speed
-    var speed = ;
+    var speed = '';
 };
 
 // Update the enemy's position, required method for game
@@ -40,8 +40,10 @@ Enemy.prototype.render = function() {
 
 //Player class definition
 var Player = function() {
-    this.sprite = 'images/char-pink-girl.png';
+    this.sprite = 'images/char-boy.png';
     //TODO set the initial location
+    this.x = 233;
+    this.y = 70;
     //TODO handle a collision
 };
 
@@ -58,14 +60,29 @@ Player.prototype.render = function(dt) {
 };
 
 //Player handleInput method
-Player.prototype.handleInput function(allowedKeys) {
+Player.prototype.handleInput = function(allowedKeys) {
     //TODO move in the direction of the keys
-    //TODO keep within the confines of the canvas (505, 606)
-    //TODO reset if the player reaches the water (find pixel # of the beginning of the row)
+    //TODO keep within the confines of the canvas width (505) and where the player hits water (486)
+    if (key === "left" && (this.x > 0 || this.x < 505)) {
+        this.x = -101;
+    };
+    if (key === "right" && (this.x > 0 || this.x < 505)) {
+        this.x = 101;
+    };
+    if (key === "up" && (this.y > 0 || this.y < 486)) {
+        this.y = 80;
+    };
+    if (key === "down" && (this.y > 0 || this.y < 486 )) {
+        this.y = -80;
+    };
+
+    //TODO reset if the player reaches the water (486)
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
+var allEnemies = [];
 // Place the player object in a variable called player
+var player = {};
 
 
 
