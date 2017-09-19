@@ -1,7 +1,8 @@
 body {
     text-align: center;
+    border:   1px solid blue;
 }
 
 canvas {
-    background: red;
+    border:  1px solid red;
 }

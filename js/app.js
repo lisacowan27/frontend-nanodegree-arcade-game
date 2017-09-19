@@ -38,11 +38,12 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 //Player class definition
-var Player = function() {
+var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     //TODO set the initial location
-    this.x = 210;
-    this.y = 420;
+    this.x = x;
+    this.y = y;
+    var direction = this.handleInput();
     //TODO handle a collision
 };
 
@@ -62,29 +63,28 @@ Player.prototype.render = function(dt) {
 Player.prototype.handleInput = function(allowedKeys) {
     //TODO move in the direction of the keys
     //TODO keep within the confines of the canvas width (505) and where the player hits water (486)
-    if ('keyup' === 'left' && (this.x > 0 || this.x < 505)) {
-        this.x = -101;
+    if (allowedKeys === 'left' && this.x > 50) {
+        this.x -= 100;
     };
-    if ('keyup' === 'right' && (this.x > 0 || this.x < 505)) {
-        this.x = 101;
+    if (allowedKeys === 'right' && this.x < 410) {
+        this.x += 100;
     };
-    if ('keyup' === 'up' && (this.y > 0 || this.y < 486)) {
-        this.y = 80;
+    if (allowedKeys === 'up' && this.y > 80) {
+        this.y -= 80;
     };
-    if ('keyup' === 'down' && (this.y > 0 || this.y < 486 )) {
-        this.y = -80;
+    if (allowedKeys === 'down' && this.y < 420) {
+        this.y += 80;
     };
 
     //TODO reset if the player reaches the water (486)
 };
 // Now instantiate your objects.
 
-
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
-// Place the player object in a variable called player
-var player = new Player();
 
+// Place the player object in a variable called player
+var player = new Player(210, 420);
 
 
 // This listens for key presses and sends the keys to your
