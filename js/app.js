@@ -5,12 +5,11 @@ var Enemy = function(y, speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    //TODO set the initial location
     this.x = -100;
     // y is below 396 and above 130 (water row + 20 padding)
     this.y = y;
-    //TODO enemy speed
-    var enemySpeed = this.speed;
+    //TODO tinker with enemy speeds
+    this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed, floor
 };
 
 // Update the enemy's position, required method for game
@@ -21,14 +20,12 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     //TODO update the location
-    //1) randomize
     //var enemySpeed = Math.floor(Math.random(this.speed) * 100);
-    enemySpeed = enemySpeed * 100 * dt;
-
-    //2) keep within the boundaries of x 0 to 505 and y 132 to 387;
-    //if ((this.x > -100 && this.x < 505) && (this.y > 132 && this.y < 387)) {
-      //  this.speed = enemySpeed * dt;
-    //}
+    this.x +=this.speed * dt;
+    if (this.x > 505) {
+        this.x = -50;
+        this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
+    }
 
     //TODO handle a collision
 };
@@ -45,7 +42,6 @@ Enemy.prototype.render = function() {
 //Player class definition
 var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
-    //TODO set the initial location
     this.x = x;
     this.y = y;
     var direction = this.handleInput();
@@ -56,18 +52,17 @@ var Player = function(x, y) {
 Player.prototype.update = function(dt) {
     //TODO update the location
     //TODO handle a collision
-    //QUESTION: WHY USE PROTOTYPE HERE WHEN WE ARE JUST CREATING 1 PLAYER, AND THERE WILL ONLY EVER BE 1 INSTANCE OF PLAYER?
 };
 
 //Player render method
+// don't really need dt here
 Player.prototype.render = function(dt) {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 //Player handleInput method
+// don't really need dt here
 Player.prototype.handleInput = function(allowedKeys) {
-    //TODO move in the direction of the keys
-    //TODO keep within the confines of the canvas width (505) and where the player hits water (486)
     if (allowedKeys === 'left' && this.x > 50) {
         this.x -= 100;
     };
@@ -86,6 +81,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Now instantiate your objects.
 
 // Place all enemy objects in an array called allEnemies
+// TODO randomize
 var allEnemies = [];
 allEnemies.push(new Enemy (345, 4),
 new Enemy (259, 7),
