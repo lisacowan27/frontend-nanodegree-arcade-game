@@ -5,7 +5,7 @@ var Enemy = function(y, speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -100;
+    this.x = 100;
     // y is below 396 and above 130 (water row + 20 padding)
     this.y = y;
     //TODO tinker with enemy speeds
@@ -21,11 +21,11 @@ Enemy.prototype.update = function(dt) {
 
     //TODO update the location
     //var enemySpeed = Math.floor(Math.random(this.speed) * 100);
-    this.x +=this.speed * dt;
+    /*this.x +=this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
-    }
+    }*/
 
     //TODO handle a collision
 };
