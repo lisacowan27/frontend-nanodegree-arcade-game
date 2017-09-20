@@ -63,17 +63,17 @@ Player.prototype.render = function(dt) {
 //Player handleInput method
 // don't really need dt here
 Player.prototype.handleInput = function(allowedKeys) {
-    if (allowedKeys === 'left' && this.x > 50) {
-        this.x -= 100;
+    if (allowedKeys === 'left' && this.x > 40) {
+        this.x -= 40;
     };
-    if (allowedKeys === 'right' && this.x < 410) {
-        this.x += 100;
+    if (allowedKeys === 'right' && this.x < 400) {
+        this.x += 40;
     };
     if (allowedKeys === 'up' && this.y > 80) {
-        this.y -= 80;
+        this.y -= 45;
     };
-    if (allowedKeys === 'down' && this.y < 420) {
-        this.y += 80;
+    if (allowedKeys === 'down' && this.y < 500) {
+        this.y += 45;
     };
 
     //TODO reset if the player reaches the water (486)
@@ -88,7 +88,7 @@ new Enemy (259, 7),
 new Enemy(175, 5));
 
 // Place the player object in a variable called player
-var player = new Player(210, 420);
+var player = new Player(210, 500);
 
 
 // This listens for key presses and sends the keys to your
