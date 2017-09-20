@@ -10,7 +10,7 @@ var Enemy = function(y, speed) {
     // y is below 396 and above 130 (water row + 20 padding)
     this.y = y;
     //TODO enemy speed
-    this.speed = speed;
+    var enemySpeed = this.speed;
 };
 
 // Update the enemy's position, required method for game
@@ -23,12 +23,12 @@ Enemy.prototype.update = function(dt) {
     //TODO update the location
     //1) randomize
     //var enemySpeed = Math.floor(Math.random(this.speed) * 100);
-    var enemySpeed = this.speed * 100;
+    enemySpeed = enemySpeed * 100 * dt;
 
     //2) keep within the boundaries of x 0 to 505 and y 132 to 387;
-    if ((this.x > -100 && this.x < 505) && (this.y > 132 && this.y < 387)) {
-        this.speed = enemySpeed * dt;
-    }
+    //if ((this.x > -100 && this.x < 505) && (this.y > 132 && this.y < 387)) {
+      //  this.speed = enemySpeed * dt;
+    //}
 
     //TODO handle a collision
 };
