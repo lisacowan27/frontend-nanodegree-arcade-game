@@ -19,15 +19,11 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    //TODO update the location
-    //var enemySpeed = Math.floor(Math.random(this.speed) * 100);
-    /*this.x +=this.speed * dt;
+    this.x +=this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
-    }*/
-
-    //TODO handle a collision
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -44,15 +40,45 @@ var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
-    var direction = this.handleInput();
     //TODO handle a collision
+
+    //player reaches the water -- something needs to happen here!
+    if (this.y < 30){
+    this.resetPlayer();
+  }
 };
 
 //Player update method
 Player.prototype.update = function(dt) {
-    //TODO update the location
-    //TODO handle a collision
+    this.resetPlayer = function () {
+        this.x = 210;
+        this.y = 500;
+    }
 };
+
+Player.prototype.collision = function() {
+    //TODO handle a collision
+    for(var i = 0; i < allEnemies.length; i++) {
+        if ((this.x < allEnemies[i].x + 100) &&
+            (this.x + 100 > allEnemies[i].x) &&
+            (this.y < allEnemies[i].y + 100) &&
+            (this.y + 100 > allEnemies[i].y)) {
+            console.log('Please try again!');
+            this.resetPlayer();
+       }
+    }
+};
+
+/*var rect1 = {x: 5, y: 5, width: 50, height: 50}
+var rect2 = {x: 20, y: 10, width: 10, height: 10}
+
+if (rect1.x < rect2.x + rect2.width &&
+   rect1.x + rect1.width > rect2.x &&
+   rect1.y < rect2.y + rect2.height &&
+   rect1.height + rect1.y > rect2.y) {
+    // collision detected!
+}*/
+
 
 //Player render method
 // don't really need dt here
@@ -65,16 +91,16 @@ Player.prototype.render = function(dt) {
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
-    };
+    }
     if (allowedKeys === 'right' && this.x < 400) {
         this.x += 40;
-    };
+    }
     if (allowedKeys === 'up' && this.y > 80) {
         this.y -= 45;
-    };
+    }
     if (allowedKeys === 'down' && this.y < 500) {
         this.y += 45;
-    };
+    }
 
     //TODO reset if the player reaches the water (486)
 };
@@ -83,9 +109,10 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place all enemy objects in an array called allEnemies
 // TODO randomize
 var allEnemies = [];
-allEnemies.push(new Enemy (345, 4),
-new Enemy (259, 7),
-new Enemy(175, 5));
+allEnemies.push(new Enemy (304, 4),
+new Enemy (218, 7),
+new Enemy (135, 5)
+);
 
 // Place the player object in a variable called player
 var player = new Player(210, 500);
