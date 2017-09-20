@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(speed) {
+var Enemy = function(y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -8,11 +8,7 @@ var Enemy = function(speed) {
     //TODO set the initial location
     this.x = -100;
     // y is below 396 and above 130 (water row + 20 padding)
-    /*this.y = function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }*/
+    this.y = y;
     //TODO enemy speed
     var speed = '';
 };
@@ -82,6 +78,9 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
+allEnemies.push(new Enemy (345, 4),
+new Enemy (259, 7),
+new Enemy(175, 5));
 
 // Place the player object in a variable called player
 var player = new Player(210, 420);
