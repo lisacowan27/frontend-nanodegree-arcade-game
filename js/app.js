@@ -1,5 +1,9 @@
+//Credits:
+
+// 1) collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+
 // Enemies our player must avoid
-var Enemy = function(y, speed) {
+var Enemy = function(x, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -7,9 +11,9 @@ var Enemy = function(y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
     this.height = 75;
-    this.x = 100;
+    this.x = x;
     // y is below 396 and above 130 (water row + 20 padding)
-    this.y = y;
+    this.y = 125 + (83 * Math.floor(Math.random() * (4 - 1)));
     //TODO tinker with enemy speeds
     this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
 };
@@ -25,6 +29,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
         this.x = -50;
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
+        //var randomY = [135, 218, 305];
+        //this.y = randomY.push(Math.floor((Math.random() * -5) +1)];
     }
 };
 
@@ -107,9 +113,10 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place all enemy objects in an array called allEnemies
 // TODO randomize
 var allEnemies = [];
-allEnemies.push(new Enemy (304, 4),
-new Enemy (218, 7),
-new Enemy (135, 5)
+allEnemies.push(new Enemy (-100, 4),
+new Enemy (-50,  7),
+new Enemy (0,  5),
+new Enemy (-25, 8)
 );
 
 // Place the player object in a variable called player
