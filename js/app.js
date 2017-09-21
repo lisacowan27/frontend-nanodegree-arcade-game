@@ -11,7 +11,7 @@ var Enemy = function(y, speed) {
     // y is below 396 and above 130 (water row + 20 padding)
     this.y = y;
     //TODO tinker with enemy speeds
-    this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed, floor
+    this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
 };
 
 // Update the enemy's position, required method for game
@@ -60,13 +60,17 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-            console.log('Please try again!');
-            this.resetPlayer();
+            alert('Please try again!');
+            this.reset();
+
        }
     }
-    this.resetPlayer = function () {
+    this.reset = function () {
         this.x = 210;
         this.y = 500;
+        for(var i = 0; i < allEnemies.length; i++) {
+
+        }
     }
 };
 
@@ -92,8 +96,12 @@ Player.prototype.handleInput = function(allowedKeys) {
         this.y += 45;
     }
 
-    //TODO reset if the player reaches the water (486)
+    //TODO reset if the player reaches the water (80)
+    if (this.y < 55) {
+        alert('You won!');
+    }
 };
+
 // Now instantiate your objects.
 
 // Place all enemy objects in an array called allEnemies
