@@ -5,6 +5,8 @@ var Enemy = function(y, speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.width = 101;
+    this.height = 75;
     this.x = 100;
     // y is below 396 and above 130 (water row + 20 padding)
     this.y = y;
@@ -38,6 +40,8 @@ Enemy.prototype.render = function() {
 //Player class definition
 var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
+    this.width = 76;
+    this.height = 78;
     this.x = x;
     this.y = y;
     //TODO handle a collision
@@ -50,35 +54,21 @@ var Player = function(x, y) {
 
 //Player update method
 Player.prototype.update = function(dt) {
+
+    for(var i = 0; i < allEnemies.length; i++) {
+        if ((this.x < allEnemies[i].x + 40) &&
+            (this.x + 40 > allEnemies[i].x) &&
+            (this.y < allEnemies[i].y + 40) &&
+            (this.y + 40 > allEnemies[i].y)) {
+            console.log('Please try again!');
+            this.resetPlayer();
+       }
+    }
     this.resetPlayer = function () {
         this.x = 210;
         this.y = 500;
     }
 };
-
-Player.prototype.collision = function() {
-    //TODO handle a collision
-    for(var i = 0; i < allEnemies.length; i++) {
-        if ((this.x < allEnemies[i].x + 100) &&
-            (this.x + 100 > allEnemies[i].x) &&
-            (this.y < allEnemies[i].y + 100) &&
-            (this.y + 100 > allEnemies[i].y)) {
-            console.log('Please try again!');
-            this.resetPlayer();
-       }
-    }
-};
-
-/*var rect1 = {x: 5, y: 5, width: 50, height: 50}
-var rect2 = {x: 20, y: 10, width: 10, height: 10}
-
-if (rect1.x < rect2.x + rect2.width &&
-   rect1.x + rect1.width > rect2.x &&
-   rect1.y < rect2.y + rect2.height &&
-   rect1.height + rect1.y > rect2.y) {
-    // collision detected!
-}*/
-
 
 //Player render method
 // don't really need dt here
