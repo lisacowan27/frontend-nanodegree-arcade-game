@@ -2,8 +2,12 @@
 
 // 1) collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
 
+// Create y array to randomize the y position for enemies
+var yArray = [135, 218, 304];
+
+
 // Enemies our player must avoid
-var Enemy = function(x, speed) {
+var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -11,9 +15,10 @@ var Enemy = function(x, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
     this.height = 75;
-    this.x = x;
+    this.x = -100;
     // y is below 396 and above 130 (water row + 20 padding)
-    this.y = 125 + (83 * Math.floor(Math.random() * (4 - 1)));
+    //this.y = 133 + (83 * Math.floor(Math.random() * 3));
+    this.y = yArray[Math.floor(Math.random() * yArray.length)];
     //TODO tinker with enemy speeds
     this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
 };
@@ -28,11 +33,18 @@ Enemy.prototype.update = function(dt) {
     this.x +=this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
+        this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
+
         //var randomY = [135, 218, 305];
         //this.y = randomY.push(Math.floor((Math.random() * -5) +1)];
     }
 };
+
+Enemy.prototype.reset = function () {
+    this.x = -100;
+    this.speed = 0;
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -55,6 +67,7 @@ var Player = function(x, y) {
     //player reaches the water -- something needs to happen here!
     if (this.y < 30){
     this.resetPlayer();
+    Enemy.prototype.reset();
   }
 };
 
@@ -105,6 +118,7 @@ Player.prototype.handleInput = function(allowedKeys) {
     //TODO reset if the player reaches the water (80)
     if (this.y < 55) {
         alert('You won!');
+
     }
 };
 
@@ -113,11 +127,9 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place all enemy objects in an array called allEnemies
 // TODO randomize
 var allEnemies = [];
-allEnemies.push(new Enemy (-100, 4),
-new Enemy (-50,  7),
-new Enemy (0,  5),
-new Enemy (-25, 8)
-);
+    for (var i = 0; i <= 2; i++){
+       allEnemies.push(new Enemy ());
+    }
 
 // Place the player object in a variable called player
 var player = new Player(210, 500);
