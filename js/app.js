@@ -5,46 +5,25 @@
 // Create y array to randomize the y position for enemies
 var yArray = [135, 218, 304];
 
-
 // Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
     this.height = 75;
     this.x = -100;
-    // y is below 396 and above 130 (water row + 20 padding)
-    //this.y = 133 + (83 * Math.floor(Math.random() * 3));
     this.y = yArray[Math.floor(Math.random() * yArray.length)];
-    //TODO tinker with enemy speeds
     this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
 };
 
 // Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-
     this.x +=this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
-
-        //var randomY = [135, 218, 305];
-        //this.y = randomY.push(Math.floor((Math.random() * -5) +1)];
     }
 };
-
-Enemy.prototype.reset = function () {
-    this.x = -100;
-    this.speed = 0;
-}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -62,18 +41,10 @@ var Player = function(x, y) {
     this.height = 78;
     this.x = x;
     this.y = y;
-    //TODO handle a collision
-
-    //player reaches the water -- something needs to happen here!
-    if (this.y < 30){
-    this.resetPlayer();
-    Enemy.prototype.reset();
-  }
 };
 
 //Player update method
 Player.prototype.update = function(dt) {
-
     for(var i = 0; i < allEnemies.length; i++) {
         if ((this.x < allEnemies[i].x + 40) &&
             (this.x + 40 > allEnemies[i].x) &&
@@ -90,6 +61,12 @@ Player.prototype.update = function(dt) {
         for(var i = 0; i < allEnemies.length; i++) {
 
         }
+    }
+    //player reaches the water -- something needs to happen here!
+    if (this.y < 55) {
+        alert('You won!');
+        this.reset();
+        Enemy.prototype.update();
     }
 };
 
@@ -115,11 +92,6 @@ Player.prototype.handleInput = function(allowedKeys) {
         this.y += 45;
     }
 
-    //TODO reset if the player reaches the water (80)
-    if (this.y < 55) {
-        alert('You won!');
-
-    }
 };
 
 // Now instantiate your objects.
