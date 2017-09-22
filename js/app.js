@@ -1,11 +1,17 @@
-//Credits:
+/*  Credits:
 
-// 1) collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+    - collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+*/
 
 // Create y array to randomize the y position for enemies
 var yArray = [135, 218, 304];
 
-// Enemies our player must avoid
+/*  Enemy class constructor definition
+    - sets enemy image and image size (for collisions)
+    - sets starting x placement for all enemies off the left side of the canvas
+    - sets random y axis placment for each enemy
+    - sets random speeds for each enemy
+*/
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
@@ -15,7 +21,11 @@ var Enemy = function() {
     this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
 };
 
-// Update the enemy's position, required method for game
+/*  Update the enemy's position
+    - update the x value of the position
+    - randomize enemies y position with each loop
+    - randomize enemies speed with each loop
+*/
 Enemy.prototype.update = function(dt) {
     this.x +=this.speed * dt;
     if (this.x > 505) {
@@ -25,16 +35,17 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 
-//Player class definition
+/*  Player class constructor definition
+    - set the player image
+    - set width and height for collisions
+    - set x and y values equal to the passed parameters
+*/
 var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.width = 76;
@@ -43,7 +54,16 @@ var Player = function(x, y) {
     this.y = y;
 };
 
-//Player update method
+/*  Player update method
+    * Collision:
+    - loop through each enemy in the array
+    - creates the collision conditions by delineating the 4 corners of each enemy and the character as they move.
+    - when there is an overlap, create a collision
+    * Reset:
+    - when a collision occurs, popup an alert, then send the player back to the starting point and send the Enemy back to the update loop when the alert is closed
+    * Win:
+    - When the player reaches the water, popup an alert, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
+*/
 Player.prototype.update = function(dt) {
     for(var i = 0; i < allEnemies.length; i++) {
         if ((this.x < allEnemies[i].x + 40) &&
@@ -52,14 +72,13 @@ Player.prototype.update = function(dt) {
             (this.y + 40 > allEnemies[i].y)) {
             alert('Please try again!');
             this.reset();
-
        }
     }
     this.reset = function () {
         this.x = 210;
         this.y = 500;
         for(var i = 0; i < allEnemies.length; i++) {
-
+            Enemy.prototype.update();
         }
     }
     //player reaches the water -- something needs to happen here!
@@ -70,14 +89,12 @@ Player.prototype.update = function(dt) {
     }
 };
 
-//Player render method
-// don't really need dt here
+//Player render method -- draw the player
 Player.prototype.render = function(dt) {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-//Player handleInput method
-// don't really need dt here
+//Player handleInput method: assign number values to key movements
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
@@ -91,21 +108,21 @@ Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'down' && this.y < 500) {
         this.y += 45;
     }
-
 };
 
-// Now instantiate your objects.
+// Instantiate the player and enemy objects
 
-// Place all enemy objects in an array called allEnemies
-// TODO randomize
+/*  Create the enemies
+    - Create blank array
+    - Push new instances into the blank array
+*/
 var allEnemies = [];
     for (var i = 0; i <= 2; i++){
        allEnemies.push(new Enemy ());
     }
 
-// Place the player object in a variable called player
+// Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
