@@ -36,10 +36,11 @@ p {
   line-height: 21px;
 }
 
-.rightCol {
+.top {
     width: 30%;
     float: right;
     padding-left: 10%;
     padding-top: 50px;
+    border: 1px solid green;
 }
 

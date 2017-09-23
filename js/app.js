@@ -5,8 +5,9 @@
     - My concepts for spacebar start/stop game from reviewing this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
 */
 
-// Create y array to randomize the y position for enemies
+// Create global variables for Enemies
 var yArray = [135, 218, 304];
+var enemyScore = 0;
 
 /*  Enemy class constructor definition
     - sets enemy image and image size (for collisions)
@@ -19,8 +20,8 @@ var Enemy = function() {
     this.width = 101;
     this.height = 75;
     this.x = -100;
-    this.y = yArray;
-    var speed = '';
+    this.y = yArray[Math.floor(Math.random() * yArray.length)];
+    var speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     this.speed = speed;
 };
 
@@ -55,6 +56,7 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.stop = false;
+    this.score = 0;
 };
 
 /*  Player update method
@@ -72,13 +74,17 @@ Player.prototype.update = function(dt) {
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
                 alert('Please try again!');
-                game.reset();
+                score.update();
+                /*console.log("enemy" + enemyScore);*/
+                this.reset();
        }
     }
     //When the player reaches the water
     if (this.y < 55) {
         alert('You won!');
-        game.reset();
+        player.score++;
+        console.log(this.score);
+        this.reset();
         Enemy.prototype.update();
     }
 };
@@ -86,6 +92,8 @@ Player.prototype.update = function(dt) {
 //Player render method -- draw the player
 Player.prototype.render = function(dt) {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    //Render the scoreboard
+    Score();
 };
 
 //Player handleInput method: assign number values to key movements
@@ -104,14 +112,14 @@ Player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
-/* This resets the game back to the beginning
+/* This resets the game back to the beginning */
 Player.prototype.reset = function () {
         this.x = 210;
         this.y = 500;
         for(var i = 0; i < allEnemies.length; i++) {
             Enemy.prototype.update();
         }
-    }*/
+    }
 
 // Instantiate the player and enemy objects
 
@@ -127,42 +135,24 @@ var allEnemies = [];
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
 
-/* Game class constructor definition
-
-*/
-var Game = function() {
-    Enemy.prototype.render();
-    Player.prototype.render();
-    console.log('this is a new game');
+// Scoreboard
+var Score = function (){
+    window.ctx.clearRect(1, 642, 500, 300);
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "#000";
+    ctx.textAlign = "left";
+    ctx.fillText("Score: "+ player.score, 1, 610);
 };
 
-/*
-* Game reset:
-    - when a collision occurs, popup an alert, then send the player back to the starting point and send the Enemy back to the update loop when the alert is closed
-*/
-Game.prototype.reset = function() {
-    player.x = 210;
-    player.y = 500;
-    for(var i = 0; i < allEnemies.length; i++) {
-        Enemy.prototype.update();
-    }
-}
-
-// Create starting message for the game
-/*Game.prototype.message = function() {
-    if (player.x === 210 && player.y === 500 && enemy.x === -100) {
-        console.log('start game here');
-        //Enemy.prototype.render();
-        //Player.prototype.render();
+Score.prototype.update = function () {
+    if (player.score++) {
+        return true;
+    } else {
+        return false;
     }
 };
 
-Game.prototype.startStop = function() {
-
-};*/
-
-// Instantiate game object
-var game = new Game();
+var score = new Score ();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
