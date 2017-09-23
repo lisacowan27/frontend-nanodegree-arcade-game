@@ -41,7 +41,6 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
 /*  Player class constructor definition
     - set the player image
     - set width and height for collisions
@@ -75,14 +74,7 @@ Player.prototype.update = function(dt) {
             this.reset();
        }
     }
-    this.reset = function () {
-        this.x = 210;
-        this.y = 500;
-        for(var i = 0; i < allEnemies.length; i++) {
-            Enemy.prototype.update();
-        }
-    }
-    //player reaches the water -- something needs to happen here!
+    //When the player reaches the water
     if (this.y < 55) {
         alert('You won!');
         this.reset();
@@ -138,5 +130,12 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// This event listener is to enable the play, pause and start button functionality
-document.addEventListener('keyup', keys);
+/* This resets the game back to the beginning */
+Player.prototype.reset = function () {
+        this.x = 210;
+        this.y = 500;
+        for(var i = 0; i < allEnemies.length; i++) {
+            Enemy.prototype.update();
+        }
+    }
+

@@ -179,4 +179,48 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+
+    /* Added button functionality here */
+
+    /*$('document.pause').click(function(e) {
+            console.log('this is pause');
+            //console.log($(this).attr('class'));
+        });*/
+
+        /*function buttons () {
+
+            if () {
+                $('.play').click(function (e) {
+                   console.log("clicked element: ", e.target);
+                   console.log("play worked!");
+                   init();
+                });
+
+            } else if () {
+                $('.pause').click(function (e) {
+                   console.log("clicked element: ", e.target);
+                   console.log("pause worked!");
+                   //console.log($(this).attr('class'));
+                });
+
+            } else if () {
+
+                $('.stop').click(function (e) {
+                    console.log("clicked element: ", e.target);
+                    console.log("stop worked!");
+                    reset = function () {
+                    this.x = 210;
+                    this.y = 500;
+                    for(var i = 0; i < allEnemies.length; i++) {
+                        Enemy.prototype.update();
+                        }
+                    }
+                });
+            }
+        }
+
+        //Call the buttons
+        buttons(); */
+
+    // close for button
 })(this);
