@@ -139,3 +139,35 @@ Player.prototype.reset = function () {
         }
     }
 
+
+/* Added button functionality here */
+
+var buttons = function () {
+    $('.play').click(function (e) {
+       console.log("clicked element: ", e.target);
+       console.log("play worked!");
+    });
+
+    $('.pause').click(function (e) {
+        console.log("clicked element: ", e.target);
+        console.log("pause worked!");
+        //Enemy.prototype.update(0);
+                    dt = 0;
+    });
+
+    $('.stop').click(function (e) {
+        console.log("clicked element: ", e.target);
+        console.log("stop worked!");
+        reset = function () {
+        this.x = 210;
+        this.y = 500;
+        for(var i = 0; i < allEnemies.length; i++) {
+            }
+        }
+    });
+}
+
+buttons();
+
+
+
