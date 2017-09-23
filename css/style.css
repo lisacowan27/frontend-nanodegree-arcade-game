@@ -1,12 +1,45 @@
+body,
+div,
+ul,
+li,
+p,
+h1,
+h2 {
+  padding: 0;
+  margin: 0;
+  font-family: 'Encode Sans', sans-serif;
+}
+
+.clear-fix {
+    overflow: auto;
+    clear: both;
+}
+
 body {
-    text-align: center;
+    font-size: 16px;
     border:   1px solid blue;
+    padding: 2% 10% 5%;
+}
+
+h1 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 60px;
 }
 
 canvas {
     border:  1px solid red;
+    float: left;
 }
 
-.fireworks {
-    /*display: none;*/
+p {
+  color: #333;
+  line-height: 21px;
 }
+
+.rightCol {
+    width: 30%;
+    float: left;
+    padding-left: 10%;
+    padding-top: 50px;
+}
+

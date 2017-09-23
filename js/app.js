@@ -3,6 +3,7 @@
     - collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
 */
 
+
 // Create y array to randomize the y position for enemies
 var yArray = [135, 218, 304];
 
@@ -136,3 +137,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// This event listener is to enable the play, pause and start button functionality
+document.addEventListener('keyup', keys);
