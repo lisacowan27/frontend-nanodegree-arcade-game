@@ -55,7 +55,12 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+
+        if (player.stop === true) {
+                reset();
+            } else if (player.stop === false) {
+                win.requestAnimationFrame(main);
+            }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -158,8 +163,13 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+
     }
+
+    /*reset = function() {
+        console.log ('game reset');
+        main();
+    }*/
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

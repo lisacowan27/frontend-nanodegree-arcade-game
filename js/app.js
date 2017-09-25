@@ -5,7 +5,6 @@
     - My concepts for spacebar start/stop game from reviewing this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
 */
 
-
 // Create y array to randomize the y position for enemies
 var yArray = [135, 218, 304];
 
@@ -20,8 +19,9 @@ var Enemy = function() {
     this.width = 101;
     this.height = 75;
     this.x = -100;
-    this.y = yArray[Math.floor(Math.random() * yArray.length)];
-    this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+    this.y = yArray;
+    var speed = '';
+    this.speed = speed;
 };
 
 /*  Update the enemy's position
@@ -34,7 +34,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
-        this.speed = Math.floor(Math.random(this.speed) * 100) + 150;
+        this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     }
 };
 
@@ -54,6 +54,7 @@ var Player = function(x, y) {
     this.height = 78;
     this.x = x;
     this.y = y;
+    this.stop = false;
 };
 
 /*  Player update method
@@ -61,8 +62,6 @@ var Player = function(x, y) {
     - loop through each enemy in the array
     - creates the collision conditions by delineating the 4 corners of each enemy and the character as they move.
     - when there is an overlap, create a collision
-    * Reset:
-    - when a collision occurs, popup an alert, then send the player back to the starting point and send the Enemy back to the update loop when the alert is closed
     * Win:
     - When the player reaches the water, popup an alert, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
 */
@@ -72,14 +71,14 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-            alert('Please try again!');
-            this.reset();
+                alert('Please try again!');
+                game.reset();
        }
     }
     //When the player reaches the water
     if (this.y < 55) {
         alert('You won!');
-        this.reset();
+        game.reset();
         Enemy.prototype.update();
     }
 };
@@ -105,6 +104,15 @@ Player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
+/* This resets the game back to the beginning
+Player.prototype.reset = function () {
+        this.x = 210;
+        this.y = 500;
+        for(var i = 0; i < allEnemies.length; i++) {
+            Enemy.prototype.update();
+        }
+    }*/
+
 // Instantiate the player and enemy objects
 
 /*  Create the enemies
@@ -118,6 +126,43 @@ var allEnemies = [];
 
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
+
+/* Game class constructor definition
+
+*/
+var Game = function() {
+    Enemy.prototype.render();
+    Player.prototype.render();
+    console.log('this is a new game');
+};
+
+/*
+* Game reset:
+    - when a collision occurs, popup an alert, then send the player back to the starting point and send the Enemy back to the update loop when the alert is closed
+*/
+Game.prototype.reset = function() {
+    player.x = 210;
+    player.y = 500;
+    for(var i = 0; i < allEnemies.length; i++) {
+        Enemy.prototype.update();
+    }
+}
+
+// Create starting message for the game
+/*Game.prototype.message = function() {
+    if (player.x === 210 && player.y === 500 && enemy.x === -100) {
+        console.log('start game here');
+        //Enemy.prototype.render();
+        //Player.prototype.render();
+    }
+};
+
+Game.prototype.startStop = function() {
+
+};*/
+
+// Instantiate game object
+var game = new Game();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
