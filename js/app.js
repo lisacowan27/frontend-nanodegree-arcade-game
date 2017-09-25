@@ -1,6 +1,8 @@
 /*  Credits:
 
-    - collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+    - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+
+    - My concepts for spacebar start/stop game from reviewing this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
 */
 
 
@@ -138,38 +140,6 @@ Player.prototype.reset = function () {
             Enemy.prototype.update();
         }
     }
-
-
-/* Added button functionality here */
-
-/*var buttons = function () {
-    $('.play').click(function (e) {
-       console.log("clicked element: ", e.target);
-       console.log("play worked!");
-    });
-
-    $('.pause').click(function (e) {
-        console.log("clicked element: ", e.target);
-        console.log("pause worked!");
-        //Enemy.prototype.update(0);
-                    dt = 0;
-    });
-
-    $('.stop').click(function (e) {
-        console.log("clicked element: ", e.target);
-        console.log("stop worked!");
-        reset = function () {
-        this.x = 210;
-        this.y = 500;
-        for(var i = 0; i < allEnemies.length; i++) {
-            }
-        }
-    });
-}
-
-}*
-
-buttons();/
 
 
 
