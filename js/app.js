@@ -131,15 +131,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-/* This resets the game back to the beginning */
-Player.prototype.reset = function () {
-        this.x = 210;
-        this.y = 500;
-        for(var i = 0; i < allEnemies.length; i++) {
-            Enemy.prototype.update();
-        }
-    }
-
-
-
