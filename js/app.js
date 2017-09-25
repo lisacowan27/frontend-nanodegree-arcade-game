@@ -142,7 +142,7 @@ Player.prototype.reset = function () {
 
 /* Added button functionality here */
 
-var buttons = function () {
+/*var buttons = function () {
     $('.play').click(function (e) {
        console.log("clicked element: ", e.target);
        console.log("play worked!");
@@ -167,7 +167,9 @@ var buttons = function () {
     });
 }
 
-buttons();
+}*
+
+buttons();/
 
 
 
