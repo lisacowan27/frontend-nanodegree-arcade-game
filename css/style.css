@@ -36,7 +36,7 @@ p {
   line-height: 21px;
 }
 
-#scoreCanvas {
+.rightCol {
     width: 30%;
     float: right;
     padding-left: 0;
