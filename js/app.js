@@ -150,16 +150,21 @@ var player = new Player(210, 500);
     - create text with variable for player score
 */
 var Score = function (){
-    ctx.clearRect(1, 600, 300, 50);
+    ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
-    //ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
-    //ctx.fillRect(0, 585, 300, 50);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 586, 505, 50);
+    ctx.fillStyle = 'black';
     ctx.fillText("Player score: "+ player.score, 1, 610);
+
 };
 
 Score.prototype.update = function () {
-    ctx.clearRect(0, 600, 300, 50);
+    ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 586, 505, 50);
+    ctx.fillStyle = 'black';
     ctx.fillText("Player score: " + player.score, 1, 610);
 };
 
