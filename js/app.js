@@ -2,12 +2,19 @@
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
 
-    - My concepts for spacebar start/stop game from reviewing this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
+    - Tips for figuring out sticky issues came from extensive review of this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
 */
 
-// Create global variables for Enemies
+// Create global variables
+// TODO :: I did this because I couldn't figure out how to gain access to ctx even though it's set as global because engine.js is loaded after app.js
+
+var CANVAS_WIDTH = 505;
+var CANVAS_HEIGHT = 606;
+var doc = document;
+var win = window;
+
+//Create global variable for enemies
 var yArray = [135, 218, 304];
-var enemyScore = 0;
 
 /*  Enemy class constructor definition
     - sets enemy image and image size (for collisions)
@@ -74,26 +81,18 @@ Player.prototype.update = function(dt) {
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
                 alert('Please try again!');
-                score.update();
-                /*console.log("enemy" + enemyScore);*/
                 this.reset();
-       }
-    }
+       } else if (this.y < 55) {
     //When the player reaches the water
-    if (this.y < 55) {
         alert('You won!');
-        player.score++;
-        console.log(this.score);
-        this.reset();
-        Enemy.prototype.update();
+        return Score.prototype.update();
+        }
     }
 };
 
 //Player render method -- draw the player
 Player.prototype.render = function(dt) {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    //Render the scoreboard
-    Score();
 };
 
 //Player handleInput method: assign number values to key movements
@@ -135,21 +134,35 @@ var allEnemies = [];
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
 
-// Scoreboard
+/*  Scoreboard class constructor definition
+    - create the canvas
+    - create text with variable for player score
+*/
+
+var speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+    this.speed = speed;
+
 var Score = function (){
-    window.ctx.clearRect(1, 642, 500, 300);
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "#000";
-    ctx.textAlign = "left";
-    ctx.fillText("Score: "+ player.score, 1, 610);
+    var canvas2 = document.getElementById('scoreCanvas');
+    this.canvas2 = canvas2;
+    var ctx2 = canvas2.getContext('2d');
+    this.ctx2 = ctx2;
+    var font = ctx2.font = "40px sans serif";
+    this.font = font;
+    var clearReact = ctx2.clearRect(0, 600, 300, 50);
+    this.clearReact = clearReact;
+    var fillText = ctx2.fillText("Score: "+ player.score, 1, 610);
+    this.fillText = fillText;
+    player.score = 0;
 };
 
 Score.prototype.update = function () {
-    if (player.score++) {
-        return true;
-    } else {
-        return false;
-    }
+    alert("yay! you da bomb!");
+    player.score++;
+    ctx2.clearRect(0, 600, 300, 50);
+    this.ctx2 = ctx2.fillText("Score: " + player.score, 1, 610);
+    player.reset();
+    Enemy.prototype.update();
 };
 
 var score = new Score ();

@@ -36,10 +36,10 @@ p {
   line-height: 21px;
 }
 
-.top {
+#scoreCanvas {
     width: 30%;
     float: right;
-    padding-left: 10%;
+    padding-left: 0;
     padding-top: 50px;
     border: 1px solid green;
 }
