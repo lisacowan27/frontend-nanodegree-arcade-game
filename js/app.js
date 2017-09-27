@@ -2,7 +2,9 @@
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
 
-    - Tips for figuring out sticky issues came from extensive review of this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
+    - Tips for figuring out sticky issues came from review of this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
+
+    - Gem collection ideas game from review of this site by a fellow Udacian: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js
 */
 
 // Create global variables
@@ -15,9 +17,8 @@ var win = window;
 var canvas = doc.createElement('canvas');
 var ctx = canvas.getContext('2d');
 
-// Create global variables for Enemies
+// Create global variable for y arrays for enemies and gems
 var yArray = [135, 218, 304];
-var enemyScore = 0;
 
 /*  Enemy class constructor definition
     - sets enemy image and image size (for collisions)
@@ -37,8 +38,8 @@ var Enemy = function() {
 
 /*  Update the enemy's position
     - update the x value of the position
-    - randomize enemies y position with each loop
-    - randomize enemies speed with each loop
+    - randomize enemies' y position with each loop
+    - randomize enemies' speed with each loop
 */
 Enemy.prototype.update = function(dt) {
     this.x +=this.speed * dt;
@@ -144,6 +145,55 @@ var allEnemies = [];
 
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
+
+/* Define Gem class constructor
+    - sets gem image and image size (for collectioin)
+    - sets starting x placement for all gems off the left side of the canvas
+    - sets random y axis placment for each gem
+    - sets random speeds for each gem (a little faster than the enemies to make it more challenging)
+*/
+
+var Gem = function(sprite) {
+    this.sprite = sprite;
+    this.width = 100;
+    this.height = 100;
+    this.x = -100;
+    this.y = yArray[Math.floor(Math.random() * yArray.length)];
+    var speed = Math.floor(Math.random(this.speed) * 100) + 200; //150 is the minimum speed,floor
+    this.speed = speed;
+};
+
+/*  Update the gem's position
+    - update the x value of the position
+    - randomize gems' y position with each loop
+    - randomize gems' speed with each loop
+*/
+
+Gem.prototype.update = function(dt) {
+    this.x +=this.speed * dt;
+    if (this.x > 505) {
+        this.x = -50;
+        this.y = yArray[Math.floor(Math.random() * yArray.length)];
+        this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+    }
+};
+
+// Draw the gem on the screen
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+/*  Create the gems
+    - Create the blank array
+    - Push new isntances into the blank array
+*/
+
+var allGems = [];
+    for (var i = 0; i <= 2; i++){
+       allGems.push(new Gem ());
+    }
+
+
 
 /*  Scoreboard class constructor definition
     - create the canvas

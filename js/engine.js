@@ -170,7 +170,10 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/GemBlue.png',       // Blue gem
+        'images/GemGreen.png',      // Green gem
+        'images/GemOrange.png'      // Orange gem
     ]);
     Resources.onReady(init);
 
