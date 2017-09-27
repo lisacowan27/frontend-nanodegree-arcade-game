@@ -227,8 +227,20 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        32: 'space'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+startStop = function(allowedKeys) {
+    if (allowedKeys === 'space' && ) {
+        // start the game
+    } else (allowedKeys === 'space' && ) {
+        // stop the game
+    }
+
+};
+
+startStop();
