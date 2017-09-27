@@ -97,6 +97,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        score.update();
         allGems.forEach(function(gem) {
             gem.update(dt);
         });
@@ -157,6 +158,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        score.render();
     }
 
     /* This function does nothing but it could have been a good place to

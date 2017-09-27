@@ -1,25 +1,24 @@
-/*  Credits:
+/* __________________________________________________________________________________________________________
+Credits:
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
 
     - Tips for figuring out sticky issues came from review of this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
 
     - Gem collection ideas game from review of this site by a fellow Udacian: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js
-*/
+__________________________________________________________________________________________________________*/
 
 // Create global variables
-// TODO :: I did this because I couldn't figure out how to gain access to ctx even though it's set as global because engine.js is loaded after app.js
-
 var CANVAS_WIDTH = 505;
 var CANVAS_HEIGHT = 630;
-var doc = document;
-var win = window;
-var canvas = doc.createElement('canvas');
-var ctx = canvas.getContext('2d');
 var go = true;
 
 // Create global variable for y arrays for enemies and gems
 var yArray = [135, 218, 304];
+
+/* __________________________________________________________________________________________________________
+
+ENEMIES
 
 /*  Enemy class constructor definition
     - sets enemy image and image size (for collisions)
@@ -55,6 +54,21 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+/* INSTANTIATE ENEMIES */
+
+/*  Create the enemies
+    - Create blank array
+    - Push new instances into the blank array
+*/
+var allEnemies = [];
+    for (var i = 0; i <= 2; i++){
+       allEnemies.push(new Enemy ());
+    }
+
+/* __________________________________________________________________________________________________________
+
+PLAYER
 
 /*  Player class constructor definition
     - set the player image
@@ -94,7 +108,7 @@ Player.prototype.update = function(dt) {
     //When the player reaches the water
     if (this.y < 55) {
         alert('You won!');
-        player.score++;
+        this.score++;
         console.log(this.score);
         this.reset();
         Enemy.prototype.update();
@@ -137,19 +151,14 @@ Player.prototype.reset = function () {
         }
     }
 
-// Instantiate the player and enemy objects
-
-/*  Create the enemies
-    - Create blank array
-    - Push new instances into the blank array
-*/
-var allEnemies = [];
-    for (var i = 0; i <= 2; i++){
-       allEnemies.push(new Enemy ());
-    }
+// Instantiate the player
 
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
+
+/* __________________________________________________________________________________________________________
+
+GEMS
 
 /* Define Gem class constructor
     - sets gem image and image size (for collectioin)
@@ -198,18 +207,25 @@ var allGems = [];
        allGems.push(new Gem ());
     }
 
+/* __________________________________________________________________________________________________________
 
+SCORES
 
 /*  Scoreboard class constructor definition
     - create the canvas
     - create text with variable for player score
 */
 var Score = function (score){
-    this.score = score;
+   //this.score = score;
 };
 
 Score.prototype.update = function () {
-    this.score++;
+    ctx.clearRect(1, 600, 505, 50);
+    ctx.font = "20px Arial";
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 586, 505, 50);
+    ctx.fillStyle = 'black';
+    ctx.fillText("Player score: "+ player.score, 1, 610);
 };
 
 Score.prototype.render = function() {
@@ -221,7 +237,11 @@ Score.prototype.render = function() {
     ctx.fillText("Player score: "+ player.score, 1, 610);
 };
 
-var score = new Score (0);
+var score = new Score ();
+
+/* __________________________________________________________________________________________________________
+
+EVENT LISTENERS */
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
