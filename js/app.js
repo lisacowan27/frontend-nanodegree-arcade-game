@@ -16,6 +16,7 @@ var doc = document;
 var win = window;
 var canvas = doc.createElement('canvas');
 var ctx = canvas.getContext('2d');
+var go = true;
 
 // Create global variable for y arrays for enemies and gems
 var yArray = [135, 218, 304];
@@ -109,6 +110,10 @@ Player.prototype.render = function(dt) {
 
 //Player handleInput method: assign number values to key movements
 Player.prototype.handleInput = function(allowedKeys) {
+    if (allowedKeys === 'space') {
+        go = !go;
+        console.log('space');
+    }
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
     }
@@ -199,26 +204,24 @@ var allGems = [];
     - create the canvas
     - create text with variable for player score
 */
-var Score = function (){
+var Score = function (score){
+    this.score = score;
+};
+
+Score.prototype.update = function () {
+    this.score++;
+};
+
+Score.prototype.render = function() {
     ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 586, 505, 50);
     ctx.fillStyle = 'black';
     ctx.fillText("Player score: "+ player.score, 1, 610);
-
 };
 
-Score.prototype.update = function () {
-    ctx.clearRect(1, 600, 505, 50);
-    ctx.font = "20px Arial";
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 586, 505, 50);
-    ctx.fillStyle = 'black';
-    ctx.fillText("Player score: " + player.score, 1, 610);
-};
-
-var score = new Score ();
+var score = new Score (0);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -233,14 +236,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-startStop = function(allowedKeys) {
-    if (allowedKeys === 'space' && ) {
-        // start the game
-    } else (allowedKeys === 'space' && ) {
-        // stop the game
-    }
-
-};
-
-startStop();
