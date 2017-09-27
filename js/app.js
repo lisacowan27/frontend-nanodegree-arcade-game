@@ -169,8 +169,8 @@ GEMS
 
 var Gem = function(sprite) {
     this.sprite = sprite;
-    this.width = 100;
-    this.height = 100;
+    this.width = 50;
+    this.height = 50;
     this.x = -100;
     this.y = yArray[Math.floor(Math.random() * yArray.length)];
     var speed = Math.floor(Math.random(this.speed) * 100) + 200; //150 is the minimum speed,floor
@@ -201,11 +201,12 @@ Gem.prototype.render = function() {
     - Create the blank array
     - Push new isntances into the blank array
 */
+var gemBlue =  new Gem('images/GemBlue.png');
+var gemGreen = new Gem('images/GemGreen.png');
+var gemOrange = new Gem('images/GemOrange.png');
 
 var allGems = [];
-    for (var i = 0; i <= 2; i++){
-       allGems.push(new Gem ());
-    }
+allGems.push(gemBlue, gemGreen, gemOrange);
 
 /* __________________________________________________________________________________________________________
 
@@ -215,7 +216,7 @@ SCORES
     - create the canvas
     - create text with variable for player score
 */
-var Score = function (score){
+var Score = function(score){
    //this.score = score;
 };
 

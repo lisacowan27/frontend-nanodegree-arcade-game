@@ -159,6 +159,10 @@ var Engine = (function(global) {
 
         player.render();
         score.render();
+
+        allGems.forEach(function(gem) {
+            gem.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
