@@ -189,7 +189,8 @@ Gem.prototype.update = function(dt) {
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     }
-    for(var i = 0; i < allGems.length; i++) {
+
+    allGems.forEach(function(gem, i) {
         if ((player.x < allGems[i].x + 25) &&
             (player.x + 35 > allGems[i].x) &&
             (player.y < allGems[i].y + 25) &&
@@ -199,14 +200,24 @@ Gem.prototype.update = function(dt) {
                 player.reset();
             // spec out capture of individual gems
             if (allGems[i] === allGems[0]) {
+                allGems.splice[i, 1];
+                console.log('blue splice here: ' + allGems.splice[i, 1]);
+                $('.blue').css('display', 'inline');
                 console.log('blue gem');
             } else if (allGems[i] === allGems[1]) {
+                allGems.splice[i, 1];
+                console.log('green splice here: ' + allGems.splice[i, 1]);
+                $('.green').css('display', 'inline');
                 console.log('green gem');
-            } else if (allGems[i] === allGems[1]) {
+            } else if (allGems[i] === allGems[2]) {
+                allGems.splice[i, 1];
+                console.log('orange splice here: ' + allGems.splice[i, 1]);
+                $('.orange').css('display', 'inline');
                 console.log('orange gem');
             }
        }
-    }
+
+    });
 };
 
 // Draw the gem on the screen

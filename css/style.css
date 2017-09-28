@@ -63,5 +63,6 @@ p {
 
 .blue, .green, .orange {
     margin-right: 5%;
+    display: none;
 }
 
