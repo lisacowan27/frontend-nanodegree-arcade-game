@@ -113,17 +113,6 @@ Player.prototype.update = function(dt) {
         this.reset();
         Enemy.prototype.update();
     }
-    for(var i = 0; i < allGems.length; i++) {
-        if ((this.x < allGems[i].x + 20) &&
-            (this.x + 20 > allGems[i].x) &&
-            (this.y < allGems[i].y + 20) &&
-            (this.y + 20 > allGems[i].y)) {
-                //alert('You\'ve captured a gem!');
-                this.score+=10;
-                console.log(this.score + " after gem");
-                this.reset();
-       }
-    }
 };
 
 //Player render method -- draw the player
@@ -199,6 +188,24 @@ Gem.prototype.update = function(dt) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+    }
+    for(var i = 0; i < allGems.length; i++) {
+        if ((player.x < allGems[i].x + 25) &&
+            (player.x + 35 > allGems[i].x) &&
+            (player.y < allGems[i].y + 25) &&
+            (player.y + 35 > allGems[i].y)) {
+                alert('You\'ve captured a gem!');
+                player.score+=10;
+                player.reset();
+            // spec out capture of individual gems
+            if (allGems[i] === allGems[0]) {
+                console.log('blue gem');
+            } else if (allGems[i] === allGems[1]) {
+                console.log('green gem');
+            } else if (allGems[i] === allGems[1]) {
+                console.log('orange gem');
+            }
+       }
     }
 };
 
