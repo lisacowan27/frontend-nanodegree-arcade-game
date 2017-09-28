@@ -2,26 +2,20 @@
 Credits:
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
-
-    - Tips for figuring out sticky issues came from review of this site by a fellow Udacian: http://slooptb.github.io/ladybugger/
-
-    - Gem collection ideas game from review of this site by a fellow Udacian: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js
 __________________________________________________________________________________________________________*/
 
-// Create global variables
-var CANVAS_WIDTH = 505;
-var CANVAS_HEIGHT = 630;
+// Global variables
 var go = true;
 
-// Create global variable for y arrays for enemies and gems
+// Global variable for y arrays for enemies and gems
 var yArray = [135, 218, 304];
 
 /* __________________________________________________________________________________________________________
 
 ENEMIES
 
-/*  Enemy class constructor definition
-    - sets enemy image and image size (for collisions)
+    Enemy class constructor definition
+    - sets enemy image and image size
     - sets starting x placement for all enemies off the left side of the canvas
     - sets random y axis placment for each enemy
     - sets random speeds for each enemy
@@ -41,6 +35,7 @@ var Enemy = function() {
     - randomize enemies' y position with each loop
     - randomize enemies' speed with each loop
 */
+
 Enemy.prototype.update = function(dt) {
     this.x +=this.speed * dt;
     if (this.x > 505) {
@@ -51,6 +46,7 @@ Enemy.prototype.update = function(dt) {
 };
 
 // Draw the enemy on the screen
+
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -61,6 +57,7 @@ Enemy.prototype.render = function() {
     - Create blank array
     - Push new instances into the blank array
 */
+
 var allEnemies = [];
     for (var i = 0; i <= 2; i++){
        allEnemies.push(new Enemy ());
@@ -70,29 +67,31 @@ var allEnemies = [];
 
 PLAYER
 
-/*  Player class constructor definition
+    Player class constructor definition
     - set the player image
     - set width and height for collisions
     - set x and y values equal to the passed parameters
+    - set the initial score to zero
 */
+
 var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.width = 76;
     this.height = 78;
     this.x = x;
     this.y = y;
-    this.stop = false;
     this.score = 0;
 };
 
 /*  Player update method
     * Collision:
-    - loop through each enemy in the array
-    - creates the collision conditions by delineating the 4 corners of each enemy and the character as they move.
-    - when there is an overlap, create a collision
+        - loop through each enemy in the array
+        - create the collision conditions by delineating the 4 corners of each enemy and the character as they move
+        - when there is an overlap, create a collision
     * Win:
-    - When the player reaches the water, popup an alert, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
+        - When the player reaches the water, popup an alert, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
 */
+
 Player.prototype.update = function(dt) {
     for(var i = 0; i < allEnemies.length; i++) {
         if ((this.x < allEnemies[i].x + 40) &&
@@ -101,7 +100,6 @@ Player.prototype.update = function(dt) {
             (this.y + 40 > allEnemies[i].y)) {
                 alert('Please try again!');
                 score.update();
-                /*console.log("enemy" + enemyScore);*/
                 this.reset();
        }
     }
@@ -109,13 +107,13 @@ Player.prototype.update = function(dt) {
     if (this.y < 55) {
         alert('You won!');
         this.score++;
-        console.log(this.score);
         this.reset();
         Enemy.prototype.update();
     }
 };
 
 //Player render method -- draw the player
+
 Player.prototype.render = function(dt) {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     //Render the scoreboard
@@ -123,6 +121,7 @@ Player.prototype.render = function(dt) {
 };
 
 //Player handleInput method: assign number values to key movements
+
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'space') {
         go = !go;
@@ -142,6 +141,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 };
 
 /* This resets the game back to the beginning */
+
 Player.prototype.reset = function () {
         this.x = 210;
         this.y = 500;
@@ -150,7 +150,7 @@ Player.prototype.reset = function () {
         }
     }
 
-// Instantiate the player
+// INSTANTIATE THE PLAYER
 
 // Create new instance of Player and assign it the the value of player
 var player = new Player(210, 500);
@@ -159,8 +159,8 @@ var player = new Player(210, 500);
 
 GEMS
 
-/* Define Gem class constructor
-    - sets gem image and image size (for collectioin)
+    Define Gem class constructor
+    - sets gem image and image size (for collection)
     - sets starting x placement for all gems off the left side of the canvas
     - sets random y axis placment for each gem
     - sets random speeds for each gem (a little faster than the enemies to make it more challenging)
@@ -177,9 +177,15 @@ var Gem = function(sprite) {
 };
 
 /*  Update the gem's position
-    - update the x value of the position
-    - randomize gems' y position with each loop
-    - randomize gems' speed with each loop
+    * Update
+        - update the x value of the position
+        - randomize gem's y position with each loop
+        - randomize gem's speed with each loop
+    * Collection
+        - loop through each gem in the array
+        - create the collection conditions by delineating the 4 corners of each gem and the player as they move
+        - when there is an overlap, the player collects the gem
+        - the gem appears in the collection space in the right-hand column and is deleted from the array
 */
 
 Gem.prototype.update = function(dt) {
@@ -188,6 +194,8 @@ Gem.prototype.update = function(dt) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+        var styleUpdate = '';
+        var arrayUpdate = '';
     }
 
     allGems.forEach(function(gem, i) {
@@ -198,29 +206,46 @@ Gem.prototype.update = function(dt) {
                 alert('You\'ve captured a gem!');
                 player.score+=10;
                 player.reset();
-            // spec out capture of individual gems
-            if (allGems[i] === allGems[0]) {
-                allGems.splice[i, 1];
-                console.log('blue splice here: ' + allGems.splice[i, 1]);
-                $('.blue').css('display', 'inline');
-                console.log('blue gem');
-            } else if (allGems[i] === allGems[1]) {
-                allGems.splice[i, 1];
-                console.log('green splice here: ' + allGems.splice[i, 1]);
-                $('.green').css('display', 'inline');
-                console.log('green gem');
-            } else if (allGems[i] === allGems[2]) {
-                allGems.splice[i, 1];
-                console.log('orange splice here: ' + allGems.splice[i, 1]);
-                $('.orange').css('display', 'inline');
-                console.log('orange gem');
+            switch (allGems[i]) {
+                case allGems[0]:
+                    styleUpdate = $('.blue').css('display', 'inline');
+                    arrayUpdate = allGems.splice(i);
+                    console.log('blue splice here: ' + allGems.splice(i, 1));
+                    break;
+                case allGems[1]:
+                    styleUpdate = $('.green').css('display', 'inline');
+                    arrayUpdate = allGems.splice(i);
+                    break;
+                case allGems[2]:
+                    styleUpdate = $('.orange').css('display', 'inline');
+                    arrayUpdate = allGems.splice(i);
+                    break;
+                /*case allGems.length === 0:
+                    alert('Yay! You\'ve collected all of the gems!');
+                    break;*/
             }
-       }
 
+            /*if (allGems[i] === allGems[0]) {
+                $('.blue').css('display', 'inline');
+                allGems.splice(i, 1);
+                console.log('blue splice here: ' + allGems.splice(i, 1));
+            } else if (allGems[i] === allGems[1]) {
+                $('.green').css('display', 'inline');
+                allGems.splice(i, 1);
+                console.log('green splice here: ' + allGems.splice(i, 1));
+            } else if (allGems[i] === allGems[2]) {
+                $('.orange').css('display', 'inline');
+                allGems.splice(i, 1);
+                console.log('orange splice here: ' + allGems.splice(i, 1));
+            } else if (allGems.length === 0) {
+                alert('Yay! You\'ve collected all of the gems!');
+            }*/
+       }
     });
 };
 
 // Draw the gem on the screen
+
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -229,6 +254,7 @@ Gem.prototype.render = function() {
     - Create the blank array
     - Push new isntances into the blank array
 */
+
 var gemBlue =  new Gem('images/GemBlue.png');
 var gemGreen = new Gem('images/GemGreen.png');
 var gemOrange = new Gem('images/GemOrange.png');
@@ -240,12 +266,13 @@ allGems.push(gemBlue, gemGreen, gemOrange);
 
 SCORES
 
-/*  Scoreboard class constructor definition
+    Scoreboard class constructor definition
     - create the canvas
     - create text with variable for player score
 */
+
 var Score = function(score){
-   //this.score = score;
+
 };
 
 Score.prototype.update = function () {
@@ -270,10 +297,13 @@ var score = new Score ();
 
 /* __________________________________________________________________________________________________________
 
-EVENT LISTENERS */
+EVENT LISTENERS
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+
+*/
+
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
