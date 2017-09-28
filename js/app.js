@@ -46,7 +46,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
-        this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
+        this.speed = Math.floor(Math.random(this.speed) * 100) + 100; //150 is the minimum speed,floor
     }
 };
 
@@ -113,6 +113,17 @@ Player.prototype.update = function(dt) {
         this.reset();
         Enemy.prototype.update();
     }
+    for(var i = 0; i < allGems.length; i++) {
+        if ((this.x < allGems[i].x + 20) &&
+            (this.x + 20 > allGems[i].x) &&
+            (this.y < allGems[i].y + 20) &&
+            (this.y + 20 > allGems[i].y)) {
+                //alert('You\'ve captured a gem!');
+                this.score+=10;
+                console.log(this.score + " after gem");
+                this.reset();
+       }
+    }
 };
 
 //Player render method -- draw the player
@@ -126,7 +137,6 @@ Player.prototype.render = function(dt) {
 Player.prototype.handleInput = function(allowedKeys) {
     if (allowedKeys === 'space') {
         go = !go;
-        console.log('space');
     }
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
