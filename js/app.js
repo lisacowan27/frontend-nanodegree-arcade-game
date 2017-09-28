@@ -194,53 +194,35 @@ Gem.prototype.update = function(dt) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
-        var styleUpdate = '';
-        var arrayUpdate = '';
     }
 
-    allGems.forEach(function(gem, i) {
-        if ((player.x < allGems[i].x + 25) &&
-            (player.x + 35 > allGems[i].x) &&
-            (player.y < allGems[i].y + 25) &&
-            (player.y + 35 > allGems[i].y)) {
+    allGems.forEach(function(gem, i, arr) {
+        if ((player.x < allGems[i].x + 30) &&
+            (player.x + 30 > allGems[i].x) &&
+            (player.y < allGems[i].y + 30) &&
+            (player.y + 30 > allGems[i].y)) {
                 alert('You\'ve captured a gem!');
                 player.score+=10;
                 player.reset();
-            switch (allGems[i]) {
-                case allGems[0]:
-                    styleUpdate = $('.blue').css('display', 'inline');
-                    arrayUpdate = allGems.splice(i);
-                    console.log('blue splice here: ' + allGems.splice(i, 1));
-                    break;
-                case allGems[1]:
-                    styleUpdate = $('.green').css('display', 'inline');
-                    arrayUpdate = allGems.splice(i);
-                    break;
-                case allGems[2]:
-                    styleUpdate = $('.orange').css('display', 'inline');
-                    arrayUpdate = allGems.splice(i);
-                    break;
-                /*case allGems.length === 0:
-                    alert('Yay! You\'ve collected all of the gems!');
-                    break;*/
-            }
 
-            /*if (allGems[i] === allGems[0]) {
+            if (allGems[i] === gemBlue) {
                 $('.blue').css('display', 'inline');
+                console.log('blue splice here: ' + allGems[i][arr]);
                 allGems.splice(i, 1);
-                console.log('blue splice here: ' + allGems.splice(i, 1));
-            } else if (allGems[i] === allGems[1]) {
+            } else if (allGems[i] === gemGreen) {
+                console.log('green splice here: ' + allGems[i][arr]);
+                allGems.splice(i, 1);
                 $('.green').css('display', 'inline');
+            } else if (allGems[i] === gemOrange) {
+                console.log('orange splice here: ' + allGems[i][arr]);
                 allGems.splice(i, 1);
-                console.log('green splice here: ' + allGems.splice(i, 1));
-            } else if (allGems[i] === allGems[2]) {
                 $('.orange').css('display', 'inline');
-                allGems.splice(i, 1);
-                console.log('orange splice here: ' + allGems.splice(i, 1));
-            } else if (allGems.length === 0) {
-                alert('Yay! You\'ve collected all of the gems!');
-            }*/
-       }
+            }
+            if (allGems.length === 0) {
+                console.log("yay me!");
+                alert('Yay! You\'ve captured all of the gems!');
+            }
+        }
     });
 };
 
