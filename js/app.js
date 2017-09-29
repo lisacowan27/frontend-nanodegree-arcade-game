@@ -98,7 +98,10 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-                alert('Please try again!');
+                //alert('Please try again!');
+                modal();
+
+
 
                 score.update();
                 this.reset();
@@ -208,14 +211,11 @@ Gem.prototype.update = function(dt) {
 
             if (allGems[i] === gemBlue) {
                 $('.blue').css('display', 'inline');
-                console.log('blue splice here: ' + allGems[i][arr]);
                 allGems.splice(i, 1);
             } else if (allGems[i] === gemGreen) {
-                console.log('green splice here: ' + allGems[i][arr]);
                 allGems.splice(i, 1);
                 $('.green').css('display', 'inline');
             } else if (allGems[i] === gemOrange) {
-                console.log('orange splice here: ' + allGems[i][arr]);
                 allGems.splice(i, 1);
                 $('.orange').css('display', 'inline');
             }
@@ -277,6 +277,22 @@ Score.prototype.render = function() {
 };
 
 var score = new Score ();
+
+var modal = function(){document.getElementById('myModal')};
+
+
+var myModal = function() {
+    document.getElementById('myModal');
+    document.getElementsByClassName("close")[0];
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+};
+
+
 
 /* __________________________________________________________________________________________________________
 
