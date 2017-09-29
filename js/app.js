@@ -2,6 +2,8 @@
 Credits:
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
+
+    - Modal scripts provided by: http://www.jqueryscript.net/lightbox/Easy-Modal-Popup-Plugin-with-jQuery-and-Bootstrap-Styles-popItUp.html. License information is included in my files.
 __________________________________________________________________________________________________________*/
 
 // Global variables
@@ -98,9 +100,16 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-                //alert('Please try again!');
-                modal();
+               //alert('Please try again!');
 
+            /*$(document).ready(function(){
+                $('.example').popitup({
+                    overlayColor: "#333",
+                    overlayOpacity: "0.5",
+                    autoClose: true
+                });
+            });*/
+            bugModal();
 
 
                 score.update();
@@ -278,22 +287,6 @@ Score.prototype.render = function() {
 
 var score = new Score ();
 
-var modal = function(){document.getElementById('myModal')};
-
-
-var myModal = function() {
-    document.getElementById('myModal');
-    document.getElementsByClassName("close")[0];
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.display = "none";
-        }
-    }
-};
-
-
-
 /* __________________________________________________________________________________________________________
 
 EVENT LISTENERS
@@ -314,3 +307,67 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+/* __________________________________________________________________________________________________________
+
+MODAL
+
+*/
+
+var bugModal = function() {
+    $(document).ready(function(){
+        $('.popit-outer-wrapper').popitup({
+            overlayColor: "#333",
+            overlayOpacity: "1",
+            autoClose: true,
+            onOpenModal    :  function(){
+            go = !go;
+            },
+            onCloseModal   :  function(){
+            go = go;
+            }
+        });
+    });
+};
+
+/* var bugModal = $('.example').popitup({
+
+  // the width of your mobile popup
+  widthSet       :  "100%",
+  // the color of the overlay
+  overlayColor   :  "#333",
+  // the opacity of the overlay
+  // values between 0.1 to 1
+  overlayOpacity :  "0.5",
+  // close the popup when click anywhere on overlay outside the popup
+  autoClose      :  true,
+  // accept: slideDown, slideUp, slideLeft, slideRight
+  animation      :  null,
+  // the text or background color of popup
+  colorChange    :  {
+    color      : null,
+    background : null
+  },
+  // Popup will chase the center of the viewport when page scrolls.
+  chase          :  false,
+  // the speed of chasing
+  chaseSpeed     :  "500",
+  // Set the popup fixed at center.
+  fixedModal     :  false,
+  // Set the position of popup in a screen by specifying X and Y axis values.
+  modalPosition  :  [],
+  // Specify the class name of your container in which the content will be loaded after ajax call.
+  containerToLoad:  "",
+  // Make an ajax call to your specified url and load the content.
+  // Note :- You have to specify the container(using containerToLoad option) in which the content to be loaded.
+  urlToLoad      :  "",
+  imageToLoad    :  "",
+  // callback methods
+  onCloseModal   :  function(){
+        //go = go;
+    },
+  onOpenModal    :  function(){
+        //go = !go;
+  }
+});*/
+
