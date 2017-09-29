@@ -1,59 +1,30 @@
-body,
-div,
-ul,
-ol,
-li,
-p,
-h1,
-h2 {
-  padding: 0;
-  margin: 0;
-  font-family: 'Encode Sans', sans-serif;
-}
-
-.clear-fix {
-    overflow: auto;
-    clear: both;
-}
-
 body {
+    font-family: 'Encode Sans', sans-serif;
     font-size: 16px;
-    border:   1px solid blue;
-    padding: 2% 10% 5%;
+    background: url('../images/background.gif') repeat;
 }
 
-h1 {
+.h1 {
     font-family: 'Indie Flower', cursive;
     font-size: 60px;
 }
 
-.rightCol {
-    width: 35%;
-    float: right;
-    padding-left: 0;
-    padding-top: 50px;
-    border: 1px solid green;
+.container {
+    background: #fff;
+    border-radius: 20px;
+    margin-top: 1em;
 }
 
-h2 {
+.rightCol {
+    margin-left: 5%;
+}
+
+.h2 {
     margin-bottom: 1em;
 }
 
 .collected {
     margin-top: 1em;
-}
-
-ol {
-    margin-left: 20px;
-}
-
-li {
-    margin-bottom: .5em;
-}
-
-canvas {
-    border:  1px solid red;
-    float: left;
 }
 
 p {

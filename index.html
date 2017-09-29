@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <title>Lisa's Arcade Game</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Encode+Sans:300,400,600|Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -12,11 +13,17 @@
           crossorigin="anonymous"></script>
 </head>
 <body class="clear-fix">
+    <div class="container">
+        <header>
+            <h1 class="h1">Lisa's Arcade Game</h1>
+        </header>
+        <main>
+            <div class="row">
+                <section class="col-sm-8 col-md-8 col-lg-8" id="gameWrapper"></section><!-- /gameWrapper-->
 
-
-        <!-- scoreboard container -->
-       <div class="rightCol">
-            <h2>Instructions</h2>
+                <aside class="col-sm-4 col-md-4 col-lg-4"><!-- right col -->
+                <div class="rightCol">
+            <h2 class="h2">Instructions</h2>
             <ol>
                 <li>To start and stop the game, press the spacebar</li>
                 <li>Use the arrow keys to move your player towards the water to win</li>
@@ -24,15 +31,15 @@
                 <li>Collect the gems and increase your score</li>
             </ol>
 
-            <h2 class="collected">Captured Gems</h2>
+            <h2 class="h2 collected">Captured Gems</h2>
                 <span class="blue"><img src="images/GemBlue.png" width="50px" height="50px"></span>
                 <span class="green"><img src="images/GemGreen.png" width="50px" height="50px"></span>
                 <span class="orange"><img src="images/GemOrange.png" width="50px" height="50px"></span>
         </div>
-
-
-
-
+                </aside><!-- /right col -->
+            </div><!-- /row -->
+        </main>
+    </div> <!-- /container -->
         <!-- add HTML elements to the page -->
 
 
@@ -41,13 +48,13 @@
         <script src="js/engine.js"></script>
         <script>
 
-        $(document).ready(function(){
-            $('<h1>Lisa\'s Arcade Game</h1>').prependTo('body');
+        //$(document).ready(function(){
+            //$('<h1>Lisa\'s Arcade Game</h1>').prependTo('body');
             /*$('<div class="playerScore">Player Score: <span>' + player.score + '</span></div>').appendTo('h1');
             $('.playerScore span').hide().html(player.score).fadeIn('fast');
             $('<div class="enemyScore">Enemy Score: ' + enemyScore + '</div>').appendTo('.playerScore');
-            $('.enemyScore span').hide().html(enemyScore).fadeIn('fast');*/
-        });
+            $('.enemyScore span').hide().html(enemyScore).fadeIn('fast');
+        });*/
     </script>
 </body>
 </html>

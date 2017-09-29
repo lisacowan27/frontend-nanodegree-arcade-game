@@ -99,6 +99,7 @@ Player.prototype.update = function(dt) {
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
                 alert('Please try again!');
+
                 score.update();
                 this.reset();
        }
