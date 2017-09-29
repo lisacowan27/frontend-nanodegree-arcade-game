@@ -45,15 +45,16 @@ p {
     display: none;
 }
 
-.popit-outer-wrapper{
+.popit-outer-wrapper, .popit-outer-wrapper-water, .popit-outer-wrapper-gem, .popit-outer-wrapper-gem-win {
     display: none;
 }
 
-.popit-outer-wrapper {
+.popit-outer-wrapper, .popit-outer-wrapper-water, .popit-outer-wrapper-gem, .popit-outer-wrapper-gem-win {
     background: #333;
     opacity: 0.8 !important; /* overriding the opacity from the dynamic overlay which does not wrap the main container */
-    padding: 200px;
+    padding: 100px 50px;
     border-radius: 20px;
+    width: 50%;
 }
 
 .popit-title {
@@ -61,22 +62,43 @@ p {
     font-size: 1.2em;
     font-weight: 400;
     font-family: 'Encode Sans', sans-serif;
+    margin-bottom: 1em;
 }
 
 .popit-p {
     font-size: 1em;
     color: #fff;
+    font-weight: 300;
 }
 
-.btn {
+button.close {
+        padding: 5px;
+}
+
+.btn, button {
     size: 6px 24px;
     border-radius: 6px;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #dcdcdc !important;
     box-shadow: rgb(255, 255, 255) 0px 1px 0px 0px inset;
-    background-color: #fff;
+    background: #fff !important;
     text-shadow: rgb(255, 255, 255) 0px 1px 0px;
     outline: 0;
 }
+
+.close {
+    opacity: 1;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    float: left;
+}
+
+.close:hover, .close:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+    filter: alpha(opacity=100);
 
 
 

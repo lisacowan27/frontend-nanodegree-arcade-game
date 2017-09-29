@@ -100,25 +100,14 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-               //alert('Please try again!');
-
-            /*$(document).ready(function(){
-                $('.example').popitup({
-                    overlayColor: "#333",
-                    overlayOpacity: "0.5",
-                    autoClose: true
-                });
-            });*/
-            bugModal();
-
-
+                bugModal();
                 score.update();
                 this.reset();
        }
     }
     //When the player reaches the water
     if (this.y < 55) {
-        alert('You won!');
+        waterModal();
         this.score++;
         this.reset();
         Enemy.prototype.update();
@@ -214,24 +203,33 @@ Gem.prototype.update = function(dt) {
             (player.x + 30 > allGems[i].x) &&
             (player.y < allGems[i].y + 30) &&
             (player.y + 30 > allGems[i].y)) {
-                alert('You\'ve captured a gem!');
+                //gemModal();
                 player.score+=10;
                 player.reset();
 
-            if (allGems[i] === gemBlue) {
+            if (allGems[i] === gemBlue && allGems.length > 0) {
                 $('.blue').css('display', 'inline');
                 allGems.splice(i, 1);
-            } else if (allGems[i] === gemGreen) {
+                console.log("allGems " + allGems.length);
+                gemModal();
+            } else if (allGems[i] === gemGreen && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.green').css('display', 'inline');
-            } else if (allGems[i] === gemOrange) {
+                console.log("allGems " + allGems.length);
+                gemModal();
+            } else if (allGems[i] === gemOrange && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.orange').css('display', 'inline');
+                console.log("allGems " + allGems.length);
+                gemModal();
             }
-            if (allGems.length === 0) {
-                console.log("yay me!");
-                alert('Yay! You\'ve captured all of the gems!');
-            }
+
+            /*if (allGems.length === 0) {
+                console.log("allGems " + allGems.length);
+                //console.log("yay me!");
+                gemModalWin();
+                //alert('Yay! You\'ve captured all of the gems!');
+            }*/
         }
     });
 };
@@ -317,18 +315,56 @@ MODAL
 var bugModal = function() {
     $(document).ready(function(){
         $('.popit-outer-wrapper').popitup({
-            overlayColor: "#333",
-            overlayOpacity: "1",
-            autoClose: true,
-            onOpenModal    :  function(){
+            onOpenModal: function(){
             go = !go;
             },
-            onCloseModal   :  function(){
+            onCloseModal: function(){
             go = go;
             }
         });
     });
 };
+
+var waterModal = function() {
+    $(document).ready(function(){
+        $('.popit-outer-wrapper-water').popitup({
+            onOpenModal: function(){
+            go = !go;
+            },
+            onCloseModal: function(){
+            go = go;
+            }
+        });
+    });
+};
+
+var gemModal = function() {
+    $(document).ready(function(){
+        $('.popit-outer-wrapper-gem').popitup({
+            onOpenModal: function(){
+            go = !go;
+            },
+            onCloseModal: function(){
+            go = go;
+            }
+        });
+    });
+};
+
+var gemModalWin = function() {
+    $(document).ready(function(){
+        $('.popit-outer-wrapper-gem-win').popitup({
+            onOpenModal: function(){
+            go = !go;
+            },
+            onCloseModal: function(){
+            go = go;
+            }
+        });
+    });
+};
+
+
 
 /* var bugModal = $('.example').popitup({
 
