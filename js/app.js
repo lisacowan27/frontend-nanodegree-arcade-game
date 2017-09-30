@@ -207,23 +207,30 @@ Gem.prototype.update = function(dt) {
                 player.score+=10;
                 player.reset();
 
-            if (allGems[i] === gemBlue && allGems.length > 0) {
-                $('.blue').css('display', 'inline');
-                allGems.splice(i, 1);
-                console.log("allGems " + allGems.length);
-                gemModal();
-            } else if (allGems[i] === gemGreen && allGems.length > 0) {
-                allGems.splice(i, 1);
-                $('.green').css('display', 'inline');
-                console.log("allGems " + allGems.length);
-                gemModal();
-            } else if (allGems[i] === gemOrange && allGems.length > 0) {
-                allGems.splice(i, 1);
-                $('.orange').css('display', 'inline');
-                console.log("allGems " + allGems.length);
-                gemModal();
+                for (j = 0; j > 2; j++) {
+                    if (allGems[i] === gemBlue && allGems.length > 0) {
+                        $('.blue').css('display', 'inline');
+                        allGems.splice(i, 1);
+                        console.log("allGems " + allGems.length);
+                        j;
+                        console.log("this is the value of j " + j);
+                    } else if (allGems[i] === gemGreen && allGems.length > 0) {
+                        allGems.splice(i, 1);
+                        $('.green').css('display', 'inline');
+                        console.log("allGems " + allGems.length);
+                        j;
+                        console.log("this is the value of j " + j);
+                    } else if (allGems[i] === gemOrange && allGems.length > 0) {
+                        allGems.splice(i, 1);
+                        $('.orange').css('display', 'inline');
+                        console.log("allGems " + allGems.length);
+                        j;
+                        console.log("this is the value of j " + j);
+                    }
+                /*if (j === 2) {
+                    gemModal();
+                }*/
             }
-
             /*if (allGems.length === 0) {
                 console.log("allGems " + allGems.length);
                 //console.log("yay me!");
