@@ -1,18 +1,15 @@
 body,
 p {
-    font-family: 'Encode Sans', sans-serif;
+    font: 16px/21px "Encode Sans", sans-serif;
 }
 
 body {
-    font-size: 16px;
     color: #333;
-    background: url('../images/background.gif') repeat;
+    background: url(../images/background.gif) repeat;
 }
 
 .h1 {
-    font-family: 'Indie Flower', cursive;
-    font-size: 60px;
-    line-height: 48px;
+    font: 60px/48px "Indie Flower", cursive;
     font-weight: 600;
 }
 
@@ -22,7 +19,7 @@ body {
     margin-top: 1em;
 }
 
-.rightCol {
+.right-col {
     margin-left: 5%;
     margin-top: 3em;
 
@@ -36,16 +33,10 @@ body {
     margin-top: 1em;
 }
 
-p {
-  line-height: 21px;
-}
-
-.blue, .green, .orange {
+.blue,
+.green,
+.orange {
     margin-right: 5%;
-    display: none;
-}
-
-.modal {
     display: none;
 }
 
@@ -53,6 +44,10 @@ p {
 
         /* MODAL STYLES */
 /*___________________________________*/
+
+.modal {
+    display: none;
+}
 
 h5 {
     font-size: 1.2em;
