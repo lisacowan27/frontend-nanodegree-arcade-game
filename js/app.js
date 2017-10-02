@@ -153,7 +153,7 @@ Player.prototype.reset = function() {
     for (var i = 0; i < allEnemies.length; i++) {
         Enemy.prototype.update();
     }
-}
+};
 
 // INSTANTIATE THE PLAYER
 
