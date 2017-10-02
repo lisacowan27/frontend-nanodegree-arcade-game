@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Lisa's Arcade Game</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <link href="https://fonts.googleapis.com/css?family=Encode+Sans:300,400,600|Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -12,13 +11,6 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"
           integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
           crossorigin="anonymous"></script>
-        <script src="js/jquery.popitup.js"></script>
-
-<script>
-
-
-</script>
-
 </head>
 <body class="clear-fix">
     <div class="container">
@@ -27,85 +19,91 @@
         </header>
         <main>
             <div class="row">
-                <section class="col-sm-8 col-md-8 col-lg-8" id="gameWrapper"></section><!-- /gameWrapper-->
-
-                <aside class="col-sm-4 col-md-4 col-lg-4"><!-- right col -->
-                <div class="right-col">
-            <h2 class="h2">Instructions</h2>
-            <ol>
-                <li>To start and stop the game, press the spacebar</li>
-                <li>Use the arrow keys to move your player towards the water (and a little rest)</li>
-                <li>Watch out for bugs! They'll eat you.</li>
-                <li>Collect the gems and increase your score. Collect all of the gems and win!</li>
-            </ol>
-
-            <h2 class="h2 collected">Captured Gems</h2>
-                <span class="blue"><img src="images/GemBlue.png" width="50px" height="50px"></span>
-                <span class="green"><img src="images/GemGreen.png" width="50px" height="50px"></span>
-                <span class="orange"><img src="images/GemOrange.png" width="50px" height="50px"></span>
-        </div>
+                <!-- game canvas wrapper -->
+                <section class="col-sm-8 col-md-8 col-lg-8" id="gameWrapper"></section>
+                <!-- right col -->
+                <aside class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right-col">
+                        <h2 class="h2">Instructions</h2>
+                        <ol>
+                            <li>To start and stop the game, press the spacebar</li>
+                            <li>Use the arrow keys to move your player towards the water (and a little rest)</li>
+                            <li>Watch out for bugs! They'll eat you.</li>
+                            <li>Collect the gems and increase your score. Collect all of the gems and win!</li>
+                        </ol>
+                        <h2 class="h2 collected">Captured Gems</h2>
+                        <!-- gem display divs -->
+                        <span class="blue"><img src="images/GemBlue.png" width="50" height="50" alt="Blue Gem"></span>
+                        <span class="green"><img src="images/GemGreen.png" width="50" height="50" alt="Green Gem"></span>
+                        <span class="orange"><img src="images/GemOrange.png" width="50" height="50" alt="Orange Gem"></span>
+                    </div>
                 </aside><!-- /right col -->
             </div><!-- /row -->
         </main>
     </div> <!-- /container -->
 
-    <!-- Bug attack modal -->
-    <div id="bugModal" class="modal fade">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          <div class="modal-header">
-            <h5 class="modal-title">You've been eaten by a bug!</h5>
+<!-- __________________________________ -->
 
-          </div>
-          <div class="modal-body">
-            <p>No worries! Close the window to continue on your adventure.</p>
-          </div>
+            <!-- MODALs -->
+<!--___________________________________-->
+
+        <!--Bug Modal-->
+        <div id="bugModal" class="modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title">You've been eaten by a bug!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>No worries! Close the window to continue on your adventure.</p>
+                    </div>
+                </div>
+             </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Water modal -->
-    <div id="waterModal" class="modal fade">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-header">
-                <h5 class="modal-title">Congralations, you've reached the water!</h5>
+        <!-- Water modal -->
+        <div id="waterModal" class="modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Congralations, you've reached the water!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Take a break from those nasty bugs and close the window when you are ready to continue.</p>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Take a break from those nasty bugs and close the window when you are ready to continue.</p>
+        </div>
+
+        <!-- Gem modal -->
+        <div id="gemModal" class="modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Congratulations, you've captured all of the gems!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bask in your glory. Today has been a good day.</p>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Gem modal -->
-    <div id="gemModal" class="modal fade">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          <div class="modal-header">
-            <h5 class="modal-title">Congratulations, you've captured all of the gems!</h5>
-          </div>
-          <div class="modal-body">
-            <p>Bask in your glory. Today has been a good day.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        <!-- Scripts required to run the site -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/resources.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/engine.js"></script>
+        <!-- /end scripts -->
 
-    <!-- Scripts required to run the site -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
-
-</body>
+    </body>
 </html>
