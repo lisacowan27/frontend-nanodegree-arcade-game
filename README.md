@@ -1,10 +1,10 @@
-#Lisa's Arcade Game
+# Lisa's Arcade Game
 
 To run and play this game, install all of the files in the archive to your directory. It is self-contained. Once your have done so, open the index.html file and open it in a browser to begin.
 
 Use the arrow keys to navigate the player throughout the canvas. If you reach the water without colliding with a bug, you will be awarded one point. If you collect a gem, you will be awarded 10 points. Once you have collected all of the gems, you win. If you collide with a bug, you'll be sent back to the bottom of the canvas to start over without losing points.
 
-##License
+## License
 
 Copyright 2017 Lisa Cowan.
 
