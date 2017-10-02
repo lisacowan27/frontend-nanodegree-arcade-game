@@ -2,11 +2,9 @@
 Credits:
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
-
-    - Modal scripts provided by: http://www.jqueryscript.net/lightbox/Easy-Modal-Popup-Plugin-with-jQuery-and-Bootstrap-Styles-popItUp.html. License information is included in my files.
 __________________________________________________________________________________________________________*/
-
 // Global variables
+// The go variable is for stopping and starting the game with the spacebar
 var go = true;
 
 // Global variable for y arrays for enemies and gems
@@ -39,7 +37,7 @@ var Enemy = function() {
 */
 
 Enemy.prototype.update = function(dt) {
-    this.x +=this.speed * dt;
+    this.x += this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
@@ -61,9 +59,9 @@ Enemy.prototype.render = function() {
 */
 
 var allEnemies = [];
-    for (var i = 0; i <= 2; i++){
-       allEnemies.push(new Enemy ());
-    }
+for (var i = 0; i <= 2; i++) {
+    allEnemies.push(new Enemy());
+}
 
 /* __________________________________________________________________________________________________________
 
@@ -91,21 +89,26 @@ var Player = function(x, y) {
         - create the collision conditions by delineating the 4 corners of each enemy and the character as they move
         - when there is an overlap, create a collision
     * Win:
-        - When the player reaches the water, popup an alert, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
+        - When the player reaches the water, popup modal, then reset the player's starting position and send the Enemy back to the update loop when the alert is closed
 */
 
 Player.prototype.update = function(dt) {
-    for(var i = 0; i < allEnemies.length; i++) {
+    for (var i = 0; i < allEnemies.length; i++) {
         if ((this.x < allEnemies[i].x + 40) &&
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-                score.update();
-                $('#bugModal').modal('show');
-                this.reset();
-       }
+            score.update();
+            $('#bugModal').modal('show');
+            this.reset();
+        }
     }
-    //When the player reaches the water
+    /* When the player reaches the water
+     * Popup a modal
+     * Reset the score
+     * Reset the player's position to the original
+     * Update the enemy loop
+     */
     if (this.y < 55) {
         $('#waterModal').modal('show');
         this.score++;
@@ -142,15 +145,15 @@ Player.prototype.handleInput = function(allowedKeys) {
     }
 };
 
-/* This resets the game back to the beginning */
+/* Reset the game back to the beginning */
 
-Player.prototype.reset = function () {
-        this.x = 210;
-        this.y = 500;
-        for(var i = 0; i < allEnemies.length; i++) {
-            Enemy.prototype.update();
-        }
+Player.prototype.reset = function() {
+    this.x = 210;
+    this.y = 500;
+    for (var i = 0; i < allEnemies.length; i++) {
+        Enemy.prototype.update();
     }
+}
 
 // INSTANTIATE THE PLAYER
 
@@ -162,10 +165,10 @@ var player = new Player(210, 500);
 GEMS
 
     Define Gem class constructor
-    - sets gem image and image size (for collection)
-    - sets starting x placement for all gems off the left side of the canvas
-    - sets random y axis placment for each gem
-    - sets random speeds for each gem (a little faster than the enemies to make it more challenging)
+    - set gems images and image sizes (for collection)
+    - set starting x placement for all gems off the left side of the canvas
+    - set random y axis placment for each gem
+    - set random speeds for each gem (a little faster than the enemies to make it more challenging)
 */
 
 var Gem = function(sprite) {
@@ -181,8 +184,8 @@ var Gem = function(sprite) {
 /*  Update the gem's position
     * Update
         - update the x value of the position
-        - randomize gem's y position with each loop
-        - randomize gem's speed with each loop
+        - randomize gems' y positions with each loop
+        - randomize gems' speeds with each loop
     * Collection
         - loop through each gem in the array
         - create the collection conditions by delineating the 4 corners of each gem and the player as they move
@@ -191,7 +194,7 @@ var Gem = function(sprite) {
 */
 
 Gem.prototype.update = function(dt) {
-    this.x +=this.speed * dt;
+    this.x += this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
@@ -203,8 +206,8 @@ Gem.prototype.update = function(dt) {
             (player.x + 30 > allGems[i].x) &&
             (player.y < allGems[i].y + 30) &&
             (player.y + 30 > allGems[i].y)) {
-                player.score+=10;
-                player.reset();
+            player.score += 10;
+            player.reset();
 
             if (allGems[i] === gemBlue && allGems.length > 0) {
                 $('.blue').css('display', 'inline');
@@ -219,6 +222,8 @@ Gem.prototype.update = function(dt) {
                 $('.orange').css('display', 'inline');
                 console.log("allGems " + allGems.length);
             }
+
+            /* When all of the gems are collected, a modal pops up to congratulate the player */
 
             if (allGems.length === 0) {
                 console.log("allGems " + allGems.length);
@@ -236,10 +241,10 @@ Gem.prototype.render = function() {
 
 /*  Create the gems
     - Create the blank array
-    - Push new isntances into the blank array
+    - Push new instances into the blank array
 */
 
-var gemBlue =  new Gem('images/GemBlue.png');
+var gemBlue = new Gem('images/GemBlue.png');
 var gemGreen = new Gem('images/GemGreen.png');
 var gemOrange = new Gem('images/GemOrange.png');
 
@@ -255,17 +260,17 @@ SCORES
     - create text with variable for player score
 */
 
-var Score = function(score){
+var Score = function(score) {
 
 };
 
-Score.prototype.update = function () {
+Score.prototype.update = function() {
     ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 586, 505, 50);
     ctx.fillStyle = 'black';
-    ctx.fillText("Player score: "+ player.score, 1, 610);
+    ctx.fillText("Player score: " + player.score, 1, 610);
 };
 
 Score.prototype.render = function() {
@@ -274,10 +279,10 @@ Score.prototype.render = function() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 586, 505, 50);
     ctx.fillStyle = 'black';
-    ctx.fillText("Player score: "+ player.score, 1, 610);
+    ctx.fillText("Player score: " + player.score, 1, 610);
 };
 
-var score = new Score ();
+var score = new Score();
 
 /* __________________________________________________________________________________________________________
 
