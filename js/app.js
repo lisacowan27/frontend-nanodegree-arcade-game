@@ -100,14 +100,14 @@ Player.prototype.update = function(dt) {
             (this.x + 40 > allEnemies[i].x) &&
             (this.y < allEnemies[i].y + 40) &&
             (this.y + 40 > allEnemies[i].y)) {
-                bugModal();
                 score.update();
+                $('#bugModal').modal('show');
                 this.reset();
        }
     }
     //When the player reaches the water
     if (this.y < 55) {
-        waterModal();
+        $('#waterModal').modal('show');
         this.score++;
         this.reset();
         Enemy.prototype.update();
@@ -203,7 +203,6 @@ Gem.prototype.update = function(dt) {
             (player.x + 30 > allGems[i].x) &&
             (player.y < allGems[i].y + 30) &&
             (player.y + 30 > allGems[i].y)) {
-                //gemModal();
                 player.score+=10;
                 player.reset();
 
@@ -211,25 +210,20 @@ Gem.prototype.update = function(dt) {
                 $('.blue').css('display', 'inline');
                 allGems.splice(i, 1);
                 console.log("allGems " + allGems.length);
-                gemModal();
             } else if (allGems[i] === gemGreen && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.green').css('display', 'inline');
                 console.log("allGems " + allGems.length);
-                gemModal();
             } else if (allGems[i] === gemOrange && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.orange').css('display', 'inline');
                 console.log("allGems " + allGems.length);
-                gemModal();
             }
 
-            /*if (allGems.length === 0) {
+            if (allGems.length === 0) {
                 console.log("allGems " + allGems.length);
-                //console.log("yay me!");
-                gemModalWin();
-                //alert('Yay! You\'ve captured all of the gems!');
-            }*/
+                $('#gemModal').modal('show');
+            }
         }
     });
 };
@@ -305,105 +299,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-/* __________________________________________________________________________________________________________
-
-MODAL
-
-*/
-
-var bugModal = function() {
-    $(document).ready(function(){
-        $('.popit-outer-wrapper').popitup({
-            onOpenModal: function(){
-            go = !go;
-            },
-            onCloseModal: function(){
-            go = go;
-            }
-        });
-    });
-};
-
-var waterModal = function() {
-    $(document).ready(function(){
-        $('.popit-outer-wrapper-water').popitup({
-            onOpenModal: function(){
-            go = !go;
-            },
-            onCloseModal: function(){
-            go = go;
-            }
-        });
-    });
-};
-
-var gemModal = function() {
-    $(document).ready(function(){
-        $('.popit-outer-wrapper-gem').popitup({
-            onOpenModal: function(){
-            go = !go;
-            },
-            onCloseModal: function(){
-            go = go;
-            }
-        });
-    });
-};
-
-var gemModalWin = function() {
-    $(document).ready(function(){
-        $('.popit-outer-wrapper-gem-win').popitup({
-            onOpenModal: function(){
-            go = !go;
-            },
-            onCloseModal: function(){
-            go = go;
-            }
-        });
-    });
-};
-
-
-
-/* var bugModal = $('.example').popitup({
-
-  // the width of your mobile popup
-  widthSet       :  "100%",
-  // the color of the overlay
-  overlayColor   :  "#333",
-  // the opacity of the overlay
-  // values between 0.1 to 1
-  overlayOpacity :  "0.5",
-  // close the popup when click anywhere on overlay outside the popup
-  autoClose      :  true,
-  // accept: slideDown, slideUp, slideLeft, slideRight
-  animation      :  null,
-  // the text or background color of popup
-  colorChange    :  {
-    color      : null,
-    background : null
-  },
-  // Popup will chase the center of the viewport when page scrolls.
-  chase          :  false,
-  // the speed of chasing
-  chaseSpeed     :  "500",
-  // Set the popup fixed at center.
-  fixedModal     :  false,
-  // Set the position of popup in a screen by specifying X and Y axis values.
-  modalPosition  :  [],
-  // Specify the class name of your container in which the content will be loaded after ajax call.
-  containerToLoad:  "",
-  // Make an ajax call to your specified url and load the content.
-  // Note :- You have to specify the container(using containerToLoad option) in which the content to be loaded.
-  urlToLoad      :  "",
-  imageToLoad    :  "",
-  // callback methods
-  onCloseModal   :  function(){
-        //go = go;
-    },
-  onOpenModal    :  function(){
-        //go = !go;
-  }
-});*/
-
