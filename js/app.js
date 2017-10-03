@@ -122,7 +122,11 @@ Player.prototype.update = function(dt) {
         $('#waterModal').modal('show');
         this.score++;
         this.reset();
-        enemy.update();
+        allEnemies.forEach(function(enemy, i) {
+            if (i === allEnemies.length) {
+            allEnemies.update();
+            }
+        });
     }
 };
 
@@ -223,21 +227,17 @@ Gem.prototype.update = function(dt) {
             if (allGems[i] === gemBlue && allGems.length > 0) {
                 $('.blue').css('display', 'inline');
                 allGems.splice(i, 1);
-                console.log("allGems " + allGems.length);
             } else if (allGems[i] === gemGreen && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.green').css('display', 'inline');
-                console.log("allGems " + allGems.length);
             } else if (allGems[i] === gemOrange && allGems.length > 0) {
                 allGems.splice(i, 1);
                 $('.orange').css('display', 'inline');
-                console.log("allGems " + allGems.length);
             }
 
             /* When all of the gems are collected, a modal pops up to congratulate the player */
 
             if (allGems.length === 0) {
-                console.log("allGems " + allGems.length);
                 $('#gemModal').modal('show');
             }
         }
