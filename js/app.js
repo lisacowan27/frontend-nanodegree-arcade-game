@@ -6,10 +6,10 @@ ________________________________________________________________________________
 
 // Global variables
 // The go variable is for stopping and starting the game with the spacebar
-var GO = true;
+var go = true;
 
 // Global variable for y arrays for enemies and gems
-var yArray = [135, 218, 304];
+var YARRAY = [135, 218, 304];
 
 /* __________________________________________________________________________________________________________
 
@@ -27,7 +27,7 @@ var Enemy = function() {
     this.width = 101;
     this.height = 75;
     this.x = -100;
-    this.y = yArray[Math.floor(Math.random() * yArray.length)];
+    this.y = YARRAY[Math.floor(Math.random() * YARRAY.length)];
     var speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     this.speed = speed;
     /* update method for the enemies
@@ -38,7 +38,7 @@ var Enemy = function() {
         this.x += this.speed * dt;
         if (this.x > 505) {
             this.x = -50;
-            this.y = yArray[Math.floor(Math.random() * yArray.length)];
+            this.y = YARRAY[Math.floor(Math.random() * YARRAY.length)];
             this.speed = Math.floor(Math.random(this.speed) * 100) + 100; //150 is the minimum speed,floor
         }
     };
@@ -129,7 +129,6 @@ Player.prototype.render = function(dt) {
     'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     //Render the scoreboard
-    Score();
 };
 
 //Player handleInput method: assign number values to key movements
@@ -137,7 +136,7 @@ Player.prototype.render = function(dt) {
 Player.prototype.handleInput = function(allowedKeys) {
     'use strict';
     if (allowedKeys === 'space') {
-        GO = !GO;
+        go = !go;
     }
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
@@ -188,7 +187,7 @@ var Gem = function(sprite) {
     this.width = 50;
     this.height = 50;
     this.x = -100;
-    this.y = yArray[Math.floor(Math.random() * yArray.length)];
+    this.y = YARRAY[Math.floor(Math.random() * YARRAY.length)];
     var speed = Math.floor(Math.random(this.speed) * 100) + 200; //150 is the minimum speed,floor
     this.speed = speed;
 };
@@ -210,7 +209,7 @@ Gem.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
-        this.y = yArray[Math.floor(Math.random() * yArray.length)];
+        this.y = YARRAY[Math.floor(Math.random() * YARRAY.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     }
 
