@@ -1,11 +1,12 @@
-/* __________________________________________________________________________________________________________
+/* _______________________________________________________________________________________________
 Credits:
 
     - The collision code is based on information from this page: https://github.com/dvampofo/Classic-Arcade/blob/Water-Collision/js/app.js, https://discussions.udacity.com/t/arcade-collision-function-issues/181377/17
-__________________________________________________________________________________________________________*/
+__________________________________________________________________________________________________*/
+
 // Global variables
 // The go variable is for stopping and starting the game with the spacebar
-var go = true;
+var GO = true;
 
 // Global variable for y arrays for enemies and gems
 var yArray = [135, 218, 304];
@@ -21,6 +22,7 @@ ENEMIES
     - sets random speeds for each enemy
 */
 var Enemy = function() {
+    'use strict';
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
     this.height = 75;
@@ -28,7 +30,10 @@ var Enemy = function() {
     this.y = yArray[Math.floor(Math.random() * yArray.length)];
     var speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     this.speed = speed;
-    // update method for the enemies
+    /* update method for the enemies
+        - update the x value of the position
+        - randomize enemies' y position with each loop
+        - randomize enemies' speed with each loop */
     this.update = function (dt) {
         this.x += this.speed * dt;
         if (this.x > 505) {
@@ -39,24 +44,10 @@ var Enemy = function() {
     };
 };
 
-/*  Update the enemy's position
-    - update the x value of the position
-    - randomize enemies' y position with each loop
-    - randomize enemies' speed with each loop
-
-
-Enemy.prototype.update = function(dt) {
-    this.x += this.speed * dt;
-    if (this.x > 505) {
-        this.x = -50;
-        this.y = yArray[Math.floor(Math.random() * yArray.length)];
-        this.speed = Math.floor(Math.random(this.speed) * 100) + 100; //150 is the minimum speed,floor
-    }
-};*/
-
 // Draw the enemy on the screen
 
 Enemy.prototype.render = function() {
+    'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -72,7 +63,7 @@ for (var i = 0; i <= 2; i++) {
     allEnemies.push(new Enemy());
 }
 
-/* __________________________________________________________________________________________________________
+/* __________________________________________________________________________________________________
 
 PLAYER
 
@@ -84,6 +75,7 @@ PLAYER
 */
 
 var Player = function(x, y) {
+    'use strict';
     this.sprite = 'images/char-boy.png';
     this.width = 76;
     this.height = 78;
@@ -102,6 +94,7 @@ var Player = function(x, y) {
 */
 
 Player.prototype.update = function(dt) {
+    'use strict';
     for (var i = 0; i < allEnemies.length; i++) {
         if ((this.x < allEnemies[i].x + 40) &&
             (this.x + 40 > allEnemies[i].x) &&
@@ -133,6 +126,7 @@ Player.prototype.update = function(dt) {
 //Player render method -- draw the player
 
 Player.prototype.render = function(dt) {
+    'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     //Render the scoreboard
     Score();
@@ -141,8 +135,9 @@ Player.prototype.render = function(dt) {
 //Player handleInput method: assign number values to key movements
 
 Player.prototype.handleInput = function(allowedKeys) {
+    'use strict';
     if (allowedKeys === 'space') {
-        go = !go;
+        GO = !GO;
     }
     if (allowedKeys === 'left' && this.x > 40) {
         this.x -= 40;
@@ -161,6 +156,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 /* Reset the game back to the beginning */
 
 Player.prototype.reset = function() {
+    'use strict';
     this.x = 210;
     this.y = 500;
     allEnemies.forEach(function(enemy, i) {
@@ -187,6 +183,7 @@ GEMS
 */
 
 var Gem = function(sprite) {
+    'use strict';
     this.sprite = sprite;
     this.width = 50;
     this.height = 50;
@@ -209,6 +206,7 @@ var Gem = function(sprite) {
 */
 
 Gem.prototype.update = function(dt) {
+    'use strict';
     this.x += this.speed * dt;
     if (this.x > 505) {
         this.x = -50;
@@ -247,6 +245,7 @@ Gem.prototype.update = function(dt) {
 // Draw the gem on the screen
 
 Gem.prototype.render = function() {
+    'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -276,6 +275,7 @@ var Score = function(score) {
 };
 
 Score.prototype.update = function() {
+    'use strict';
     ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
     ctx.fillStyle = 'white';
@@ -285,6 +285,7 @@ Score.prototype.update = function() {
 };
 
 Score.prototype.render = function() {
+    'use strict';
     ctx.clearRect(1, 600, 505, 50);
     ctx.font = "20px Arial";
     ctx.fillStyle = 'white';
@@ -295,7 +296,7 @@ Score.prototype.render = function() {
 
 var score = new Score();
 
-/* __________________________________________________________________________________________________________
+/* __________________________________________________________________________________________________
 
 EVENT LISTENERS
 
