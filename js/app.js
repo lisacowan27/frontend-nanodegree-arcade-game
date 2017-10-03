@@ -156,10 +156,10 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 /* Reset the game back to the beginning */
 
-Player.prototype.reset = function(allEnemies) {
+Player.prototype.reset = function() {
     this.x = 210;
     this.y = 500;
-    allEnemies.forEach(function(allEnemies, i) {
+    allEnemies.forEach(function(enemy, i) {
         if (i === allEnemies.length) {
         allEnemies.update();
         }
