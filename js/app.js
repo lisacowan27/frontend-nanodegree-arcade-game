@@ -28,13 +28,22 @@ var Enemy = function() {
     this.y = yArray[Math.floor(Math.random() * yArray.length)];
     var speed = Math.floor(Math.random(this.speed) * 100) + 150; //150 is the minimum speed,floor
     this.speed = speed;
+    // update method for the enemies
+    this.update = function (dt) {
+        this.x += this.speed * dt;
+        if (this.x > 505) {
+            this.x = -50;
+            this.y = yArray[Math.floor(Math.random() * yArray.length)];
+            this.speed = Math.floor(Math.random(this.speed) * 100) + 100; //150 is the minimum speed,floor
+        }
+    };
 };
 
 /*  Update the enemy's position
     - update the x value of the position
     - randomize enemies' y position with each loop
     - randomize enemies' speed with each loop
-*/
+
 
 Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
@@ -43,7 +52,7 @@ Enemy.prototype.update = function(dt) {
         this.y = yArray[Math.floor(Math.random() * yArray.length)];
         this.speed = Math.floor(Math.random(this.speed) * 100) + 100; //150 is the minimum speed,floor
     }
-};
+};*/
 
 // Draw the enemy on the screen
 
@@ -113,7 +122,7 @@ Player.prototype.update = function(dt) {
         $('#waterModal').modal('show');
         this.score++;
         this.reset();
-        Enemy.prototype.update();
+        enemy.update();
     }
 };
 
@@ -147,12 +156,14 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 /* Reset the game back to the beginning */
 
-Player.prototype.reset = function() {
+Player.prototype.reset = function(allEnemies) {
     this.x = 210;
     this.y = 500;
-    for (var i = 0; i < allEnemies.length; i++) {
-        Enemy.prototype.update();
-    }
+    Enemy.forEach(function(allEnemies, i) {
+        if (i === allEnemies.length) {
+        allEnemies.update();
+        }
+    });
 };
 
 // INSTANTIATE THE PLAYER
